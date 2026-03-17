@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora Solar Vision</title>
+</head>
+<body>
+
+    <h1>Verificar Eficiência</h1>
+    Luminosidade (1-1023): <input type="text" id="ipt_Luz">
+    <button onclick="verificar()">Calcular Eficiência</button>
+    <div id="msg_Res"></div>
+
+    <br><br>
+
+    <h1>Cálculo de Prejuízo</h1>
+    Horas por dia no sol: <input type="text" id="ipt_Horas_Dia"> <br>
+    Quantidade de dias: <input type="text" id="ipt_Dias"> <br>
+    <button onclick="calcular()">Mostrar Prejuízo</button>
+    <div id="msg_Mos"></div>
+
+    <script>
+        var porcentagem = 0;
+
+        function verificar() {
+            var luz = Number(ipt_Luz.value);
+            porcentagem = (luz / 1023) * 100;
+
+            if (porcentagem < 50) {
+                msg_Res.innerHTML += `<br>Verifique seu painel. Eficiência em: ${porcentagem.toFixed(0)}%`;
+            } else {
+                msg_Res.innerHTML += `<br>Painel em dia! Eficiência em: ${porcentagem.toFixed(0)}%`;
+            }
+        }
+
+        function calcular() {
+            var horas = Number(ipt_Horas_Dia.value);
+            var dias = Number(ipt_Dias.value);
+            
+            var kwhPorHora = 0.3;
+            var totalHoras = horas * dias;
+
+            var idealKwh = totalHoras * kwhPorHora;
+            var realKwh = idealKwh * (porcentagem / 100);
+
+            var valorIdeal = idealKwh * 1;
+            var valorReal = realKwh * 1;
+            var prejuizo = valorIdeal - valorReal;
+
+            msg_Mos.innerHTML += `<br>
+                <br><b>Novo Cálculo:</b> <br>
+                <b>Período:</b> <b>${dias}</b> dias com <b>${horas}</b> horas de sol/dia. <br>
+                <b>Eficiência:</b> ${porcentagem.toFixed(0)}% <br><br>
+
+                <b>Energia ideal (100%):</b> ${idealKwh.toFixed(2)} kWh <br> 
+                <b>Energia real gerada:</b> ${realKwh.toFixed(2)} kWh <br><br> 
+                
+                <b>Valor ideal (100%):</b> R$${valorIdeal.toFixed(2)} <br> 
+                <b>Valor real gerado:</b> R$${valorReal.toFixed(2)} <br><br>
+                
+                <b>Valor que deixou de ganhar:</b> R$${prejuizo.toFixed(2)}<br>`;
+        }
+    </script>
+
+</body>
+</html>

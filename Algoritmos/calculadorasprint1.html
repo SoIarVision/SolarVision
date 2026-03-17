@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagnóstico Solar Vision</title>
+    
+</head>
+<body>
+
+    <h2><b>Diagnóstico de Soiling </b></h2>
+    
+    Leitura do Arduino (0-1023): 
+    <input type="number" id="ipt_arduino"> <br><br>
+
+    Valor da sua última conta de luz: R$ 
+    <input type="number" id="ipt_conta" > <br><br>
+
+    <button onclick="analisar()">Verificar Perda</button>
+
+    <div id="msg_resultado"></div>
+
+    <script>
+        function analisar() {
+            
+            let leitura = Number(ipt_arduino.value);
+            let conta = Number(ipt_conta.value);
+
+        
+            let eficiencia = (leitura / 1023) * 100;
+            let perdaSoiling = 100 - eficiencia;
+
+        
+            let prejuizoMensal = (perdaSoiling / 100) * conta;
+
+            
+            msg_resultado.innerHTML = 
+            `
+                <hr>
+                <h3>Resultado do Sensor:</h3>
+                Seu painel está com <b>${perdaSoiling.toFixed(1)}%</b> de obstrução por sujeira. <br>
+                Isso significa que a poeira está roubando R$ <b>${prejuizoMensal.toFixed(2)}</b> da sua conta este mês! <br><br>
+                
+            `;
+        }
+    </script>
+
+</body>

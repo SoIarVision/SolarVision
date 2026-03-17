@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarVision</title>
+</head>
+<body>
+    <h1>Simulador Financeiro</h1>
+
+    <div>
+        Geração média mensal ideal (kWh)*: <input id="ipt_geracao"> <br>
+        Tarifa de energia (R$/kWh): <input id="ipt_tarifa"> <br>
+        Eficiência atual do sistema (%): <input id="ipt_eficiencia"> <br> <br>
+        Obs.: utilizado eficiência em 80% e tarifa R$1,00 em caso de campo em branco. <br> <br> 
+    </div>
+
+    <button onclick="calcular()">Realizar o cálculo</button>
+    <button onclick="limpar()">Limpar</button> <br> <br>
+
+    <div>
+        <div id="div_gerideal"></div>
+        <div id="div_geratual"></div> <br>
+        <div id="div_ecoideal"></div>
+        <div id="div_ecoatual"></div> <br>
+        <div id="div_perkwh"></div>
+        <div id="div_perdin"></div> <br> <br>
+    </div>
+</body>
+<script>
+    div_gerideal.innerHTML = `Geração ideal por mês (kWh): 0.00`
+    div_geratual.innerHTML = `Geração atual estimada (kWh): 0.00`
+    div_ecoideal.innerHTML = `Economia ideal no mês: R$ 0.00`
+    div_ecoatual.innerHTML = `Economia atual estimada: R$ 0.00`
+    div_perkwh.innerHTML = `Perda mensal estimada (kWh): 0.00`
+    div_perdin.innerHTML = `Perda mensal estimada: R$ 0.00`
+
+    function calcular() {
+        let geracao = Number(ipt_geracao.value) 
+        let eficiencia = Number(ipt_eficiencia.value)
+        let tarifa = Number(ipt_tarifa.value)
+
+        if (ipt_geracao.value == "") {
+            alert('Insira a geração média mensal ideal.')
+            return
+        }
+        if (ipt_eficiencia.value == "") {
+            eficiencia = 80
+        }
+        if (ipt_tarifa.value == "") {
+            tarifa = 1
+        }
+
+        let geracao_ideal = geracao
+        let geracao_atual = geracao * (eficiencia / 100)
+        let economia_ideal = geracao * tarifa
+        let economia_atual = geracao_atual * tarifa
+        let perda_kwh = geracao_ideal - geracao_atual
+        let perda_dinheiro = economia_ideal - economia_atual
+
+        div_gerideal.innerHTML = `Geração ideal por mês (kWh): <b>${geracao_ideal.toFixed(2)}</b>`
+        div_geratual.innerHTML = `Geração atual estimada (kWh): <b>${geracao_atual.toFixed(2)}</b>`
+        div_ecoideal.innerHTML = `Economia ideal no mês: <b>R$ ${economia_ideal.toFixed(2)}</b>`
+        div_ecoatual.innerHTML = `Economia atual estimada: <b>R$ ${economia_atual.toFixed(2)}</b>`
+        div_perkwh.innerHTML = `Perda mensal estimada (kWh): <b>${perda_kwh.toFixed(2)}</b>`
+        div_perdin.innerHTML = `Perda mensal estimada: <b>R$ ${perda_dinheiro.toFixed(2)}</b>`
+    }
+    function limpar() {
+        div_gerideal.innerHTML = `Geração ideal por mês (kWh): 0.00`
+        div_geratual.innerHTML = `Geração atual estimada (kWh): 0.00`
+        div_ecoideal.innerHTML = `Economia ideal no mês: R$ 0.00`
+        div_ecoatual.innerHTML = `Economia atual estimada: R$ 0.00`
+        div_perkwh.innerHTML = `Perda mensal estimada (kWh): 0.00`
+        div_perdin.innerHTML = `Perda mensal estimada: R$ 0.00`
+        ipt_geracao.value = ""
+        ipt_eficiencia.value = ""
+        ipt_tarifa.value = ""
+    }
+</script>
+</html>
