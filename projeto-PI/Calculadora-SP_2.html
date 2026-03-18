@@ -47,7 +47,6 @@
 
         if (val_geracao.value == "") {
             alert("Insira o consumo mensal de energia")
-            return
         }
 
         if (val_tarifa.value == "") {
@@ -62,17 +61,25 @@
 
         if (eficiencia >= 90 && eficiencia <= 100) {
             status = "Painéis limpos ✅";
-        } else if (eficiencia >= 70) {
+        }
+        else if (eficiencia >= 70) {
             status = "Atenção: possível sujeira ⚠️";
-        } else if (eficiencia < 70) {
+        }
+        else if (eficiencia < 70) {
             status = "🚨 Limpeza recomendada imediatamente!";
         }
 
         if (eficiencia > 100) {
             alert("A eficiência não deve ser maior que 100%")
+            val_geracao.value = ""
+            val_tarifa.value = ""
+            val_eficiencia.value = ""
         }
         else if (eficiencia <= 0) {
             alert("A eficiência não deve ser menor que 1%")
+            val_geracao.value = ""
+            val_tarifa.value = ""
+            val_eficiencia.value = ""
         }
 
         let consumoAtual = consumo * (eficiencia / 100)
@@ -106,7 +113,7 @@
 
         }
         else if (eficiencia == 100) {
-        div_economia.innerHTML = `
+            div_economia.innerHTML = `
         <b>Resultado:</b><br><br>
 
         Consumo ideal: ${consumo.toFixed(2)} kWh<br>
