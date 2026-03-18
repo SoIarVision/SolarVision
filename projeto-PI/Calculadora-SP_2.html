@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarVision</title>
+</head>
+
+<body>
+
+    <h1>Simulador Financeiro - SolarVision</h1>
+
+    Consumo médio mensal de energia (kWh):
+    <br>
+    <input type="text" id="val_geracao">
+    <br><br>
+
+    Tarifa de energia (R$/kWh):
+    <br>
+    <input type="text" id="val_tarifa">
+    <br><br>
+
+    Eficiência dos painéis (afetados por soiling):
+    <br>
+    <input type="text" id="val_eficiencia">
+    <br><br>
+
+    Se deixar em branco: eficiência = 80% e tarifa = R$1,00
+    <br><br>
+
+    <button onclick="calcular()">Calcular</button>
+    <button onclick="limpar()">Limpar</button>
+    <br><br>
+
+    <div id="div_economia"></div>
+
+</body>
+
+<script>
+    function calcular() {
+        let consumo = Number(val_geracao.value)
+        let tarifa = Number(val_tarifa.value)
+        let eficiencia = Number(val_eficiencia.value)
+
+
+
+        if (val_geracao.value == "") {
+            alert("Insira o consumo mensal de energia")
+            return
+        }
+
+        if (val_tarifa.value == "") {
+            tarifa = 1
+        }
+
+        if (val_eficiencia.value == "") {
+            eficiencia = 80
+        }
+
+        let status = "";
+
+        if (eficiencia >= 90 && eficiencia <= 100) {
+            status = "Painéis limpos ✅";
+        } else if (eficiencia >= 70) {
+            status = "Atenção: possível sujeira ⚠️";
+        } else if (eficiencia < 70) {
+            status = "🚨 Limpeza recomendada imediatamente!";
+        }
+
+        if (eficiencia > 100) {
+            alert("A eficiência não deve ser maior que 100%")
+        }
+        else if (eficiencia <= 0) {
+            alert("A eficiência não deve ser menor que 1%")
+        }
+
+        let consumoAtual = consumo * (eficiencia / 100)
+        let economiaIdeal = consumo * tarifa
+        let economiaAtual = consumoAtual * tarifa
+
+        let perdaKwh = consumo - consumoAtual
+        let perdaDinheiro = economiaIdeal - economiaAtual
+        let perdaAnual = perdaDinheiro * 12
+
+        if (eficiencia < 100 && eficiencia > 0) {
+            div_economia.innerHTML = `
+        <b>Resultado:</b><br><br>
+
+        Consumo ideal: ${consumo.toFixed(2)} kWh<br>
+        Consumo considerando eficiência: ${consumoAtual.toFixed(2)} kWh<br><br>
+
+        Economia ideal: R$ ${economiaIdeal.toFixed(2)}<br>
+        Economia atual: R$ ${economiaAtual.toFixed(2)}<br><br>
+
+        <b>
+        Você está jogando R$ ${perdaDinheiro.toFixed(2)} fora TODO MÊS e R$ ${perdaAnual.toFixed(2)} POR ANO sem a SolarVision.
+        </b><br><br>
+
+        Isso indica possível acúmulo de soiling nos painéis, reduzindo a captação de luz.
+        <br>
+        A SolarVision detecta isso automaticamente e te avisa antes do prejuízo aumentar.
+        <br>
+        <b>Status do sistema:</b> ${status}<br><br>
+        `
+
+        }
+        else if (eficiencia == 100) {
+        div_economia.innerHTML = `
+        <b>Resultado:</b><br><br>
+
+        Consumo ideal: ${consumo.toFixed(2)} kWh<br>
+        Consumo considerando eficiência: ${consumoAtual.toFixed(2)} kWh<br><br>
+
+        Economia ideal: R$ ${economiaIdeal.toFixed(2)}<br>
+        Economia atual: R$ ${economiaAtual.toFixed(2)}<br><br>
+        `
+        }
+
+        else {
+            div_economia.innerHTML = ``
+        }
+
+    }
+
+    function limpar() {
+        val_geracao.value = ""
+        val_tarifa.value = ""
+        val_eficiencia.value = ""
+
+        div_economia.innerHTML = ""
+    }
+</script>
+
+</html>
