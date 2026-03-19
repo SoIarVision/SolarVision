@@ -22,6 +22,8 @@ O que fazer || Prazo de Entrega || Quem (Responsável)
 Item A 05/abr Fulano
 Item B 06/abr Fulana
 
+Pauta p/ Review:
+
 
 
 Dailys todo dia as 9:30 !
