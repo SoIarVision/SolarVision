@@ -3,6 +3,7 @@
 CREATE DATABASE projetoPi;
 USE projetoPi;
 
+
 -- CRIAÇÃO DAS TABELAS
 
 CREATE TABLE painel (
