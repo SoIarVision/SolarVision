@@ -1,4 +1,3 @@
-drop database solar_Vision;
 CREATE DATABASE solar_Vision;
 USE solar_Vision;
 
@@ -35,20 +34,20 @@ permissao tinyint default(0) -- se for 0 responsavel , se for 1 adm
 
 
 CREATE TABLE registro ( -- medida 
-    idRegistro INT auto_increment,
+    idRegistro INT Primary key auto_increment,
     valorLuminosidade INT,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
-    fkarduino int , -- qual o arduino 
-    constraint primary key (idRegistro,fkarduino), 
-    constraint arduinofk foreign key (fkarduino) references arduino (idarduino),
+    -- fkarduino int, -- qual o arduino 
+    -- constraint primary key (idRegistro,fkarduino), 
+    -- constraint arduinofk foreign key (fkarduino) references arduino (idarduino),
     data_registro datetime default current_timestamp
     
 );
 
 insert into empresa (nome,cnpj,contato,email,endereco,senha) values 
-('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350''bydenergy.'),
+('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350','bydenergy.'),
 ('Complexo Janaúva','10454392321','11970654921','complexojanauva@gmail.com','Rua Manoel Jardim 3456 ','complexojanauva'),
-('Samsung','23403291232','11979065932','samsungcontato@gmail.com','samsungbasic');
+('Samsung','23403291232','11979065932','samsungcontato@gmail.com',NULL,'samsungbasic');
 
  
  
@@ -69,8 +68,6 @@ where fkempresa >= 0;
 
 select valorLuminosidade,data_registro,nome,idarduino from registro
  join arduino on fkarduino = idarduino join empresa on idempresa = fkempresaarduino;
-
-
 
 
 
