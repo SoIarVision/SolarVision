@@ -1,44 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 
 
-    .body {
-        background-color: #FFFFFF;
-    }
+body {
+    background-image: url(fundosite.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
 
-    .buttons {
-        background-color: #F54F00;
-        border: none;
-        padding: 12px 28px;
-        border-radius: 10px;
-        color: #FFFFFF;
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.2s, transform 0.1s;
-    }
+.buttons {
+    background-color: #F54F00;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
 
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 90px;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    opacity: 45%;
+    background: #0E002B;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
 
-        background: #0E002B;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-        z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
 
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        justify-content: space-around;
-        
-    }
+}
 
-    .titulo {
-         color:#FFFFFF;
-         font-family: 'Syne', sans-serif;
-         font-size: 50px;
-    }
+.titulo {
+    color: #FFFFFF;
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+}
+
+a {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 10px;
+    color: rgb(230, 223, 216);
+    border-style: none;
+    text-decoration: none;
+}
+
+.corpo {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+  
+
+}
+
+.direita {
+    flex: 1;
+
+}
+.conteudo {
+      display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.esquerda {
+   
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+img{
+    width: 300px;
+    height: 300px;
+}
+p{
+    color: rgb(255, 255, 255);
+   font-size: larger;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   text-shadow: 2px 2px 5px black;
+}
