@@ -53,6 +53,9 @@ a {
     border-style: none;
     text-decoration: none;
 }
+a:hover{
+    color: orangered;
+}
 
 .corpo {
     height: 100vh;
@@ -94,7 +97,7 @@ img {
 p {
     color: rgb(255, 255, 255);
     font-size: larger;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-shadow: 2px 2px 5px black;
 }
 .corpo_textos{
@@ -122,7 +125,7 @@ p {
           border-left-style: width 10px;
            border-color: rgb(240, 240, 211);
             border-radius: 15px; padding: 20px;
-             width: 500px;
-              height: 200px;
-               background: rgba(14, 0, 43, 0.45);
+             width: 100%;
+              height: auto;
+               background: rgba(30, 2, 86, 0.646);
 }
