@@ -10,24 +10,40 @@
 
 <body>
     <header>
-    <h1 class="titulo">SolarVision</h1>
+        <img src="../ASSETS/TESTE.png" alt="" class="logo">
+        <h1 class="titulo">SolarVision</h1>
+
+        <div class="anchor">
+        <a href="site.html">Home</a>
+        <a href="">Sobre</a>
+        <a href="Calculadora-SP_2.html">Calculadora</a>
+        <a href="Cadastro.html">Cadastro</a>
+        <a href="Login.html">Login</a>
+        </div>
+    
     </header>
+
     <div class="container">
         <h1>Simulador Financeiro</h1>
+
         <div class="input_box">
             <span>Consumo médio mensal de energia (kWh):</span>
             <input type="text" id="val_geracao" placeholder=" ">
         </div>
+        
         <div class="input_box">
             <span>Tarifa de energia (R$/kWh):</span>
             <input type="text" id="val_tarifa" placeholder=" ">
         </div>
+        
         <div class="input_box">
             <span>Eficiência dos painéis (afetados por soiling):</span>
             <input type="text" id="val_eficiencia" placeholder=" ">
         </div>
+        
         <button onclick="calcular()">Calcular</button>
         <button onclick="limpar()">Limpar</button>
+        
         <br><br>
 
         <div id="div_economia" class="economia"></div>

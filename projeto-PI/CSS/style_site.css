@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 
 body {
-    background-image: url(../ASSETS/fundosite.jpg);
-    background-size: cover;
-    background-attachment: fixed;
     margin: 0;
 
     padding-top: 90px;
 
+    background-color: #0E002B;
     font-family: 'Space Grotesk', sans-serif;
 }
 
@@ -26,7 +24,7 @@ header {
     align-items: center;
 
     background: #0E002B;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.4); 
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
 .logo {
@@ -48,9 +46,9 @@ header {
 /* ================= ANCHORS ================= */
 
 .anchor {
-    position: absolute;   
+    position: absolute;
     right: 30px;
-    
+
     display: flex;
     gap: 20px;
     align-items: center;
@@ -73,12 +71,24 @@ header {
 
 /* ================= CONTEUDO ================= */
 
+
+
 .corpo {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 100px;
+
+    background-image:
+        linear-gradient(to right,
+            rgba(10, 0, 60, 0.85) 0%,
+            rgba(10, 20, 80, 0.6) 60%,
+            rgba(10, 20, 80, 0.3) 100%),
+        url('../ASSETS/fundosite.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .direita {
@@ -107,13 +117,11 @@ img {
 p {
     color: rgb(255, 255, 255);
     font-size: larger;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    text-shadow: 2px 2px 5px black;
 }
 
 /* ================= BLOCO SOBRE ================= */
 
-.corpo_textos{
+.corpo_textos {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -121,13 +129,13 @@ p {
     flex-direction: column;
 }
 
-.titulo_textos{
-    color: aliceblue;
+.titulo_textos {
+    color: rgb(255, 255, 255);
     margin-bottom: 20px;
 }
 
-.corpo_bloco_textos{
-    background: #000000;
+.corpo_bloco_textos {
+    background: #0E002B;
     padding: 48px 44px;
     border-radius: 24px;
     box-shadow: 0 8px 32px rgba(14, 0, 43, 0.6);
