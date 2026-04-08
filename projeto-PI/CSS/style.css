@@ -15,6 +15,7 @@ body {
 
     font-family: 'Space Grotesk', sans-serif;
 }
+/* ================= HEADER ================= */
 
 header {
     position: fixed;
@@ -28,6 +29,7 @@ header {
     align-items: center;
 
     background: #0E002B;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4); 
 }
 
 .logo {
@@ -45,6 +47,35 @@ header {
     font-weight: 800;
     color: #FFFFFF;
 }
+
+/* ================= ANCHORS ================= */
+
+.anchor {
+    position: absolute;   
+    right: 30px;
+    
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.anchor a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    transition: 0.2s;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.anchor a:hover {
+    background: #F54F00;
+    transform: translateY(-2px);
+}
+
+/* ================= CONTEUDO ================= */
+
 
 .container {
     background: #FFFFFF;

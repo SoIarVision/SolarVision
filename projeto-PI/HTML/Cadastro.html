@@ -12,44 +12,79 @@
     <header>
         <img src="../ASSETS/TESTE.png" alt="" class="logo">
         <h1 class="titulo">SolarVision</h1>
+
+        <div class="anchor">
+            <a href="site.html">Home</a>
+            <a href="">Sobre</a>
+            <a href="Calculadora-SP_2.html">Calculadora</a>
+            <a href="Cadastro.html">Cadastro</a>
+            <a href="Login.html">Login</a>
+        </div>
+
     </header>
+
     <div id="div_cadastro" class="container">
         <h1>Cadastro - Empresa</h1>
+
         <div class="input_box">
-            <span>Nome:</span>
+            <span>Nome</span>
             <input type="text" id="val_nome" placeholder=" ">
         </div>
+
         <div class="input_box">
-            <span>E-mail</span>
+            <span>Email</span>
             <input type="text" id="val_email" placeholder=" ">
         </div>
-        <div class="input_box">
-            <span>CNPJ:</span>
-            <input type="text" id="val_cnpj" placeholder=" ">
-        </div>
+
         <div class="input_box">
             <span>Senha</span>
-            <input type="text" id="val_senha" placeholder=" ">
+            <input type="password" id="val_senha" placeholder=" ">
         </div>
+
         <div class="input_box">
-            <span>Confirmar senha:</span>
-            <input type="text" id="val_confirmar" placeholder=" ">
+            <span>Confirmar senha</span>
+            <input type="password" id="val_confirmar" placeholder=" ">
         </div>
+
         <button onclick="cadastrar()">Cadastrar</button>
         <br><br>
     </div>
+
 </body>
 
 <script>
-    let nome = val_nome.value
-    let email = val_email.value
-    let senha = val_senha.value
-    let confirmar = val_confirmar.value
+function cadastrar() {
 
-    function cadastrar() {
+    let nome = val_nome.value.trim()
+    let email = val_email.value.trim()
+    let senha = val_senha.value.trim()
+    let confirmar = val_confirmar.value.trim()
 
+    if (nome == "" || email == "" || senha == "" || confirmar == "") {
+        alert("Preencha todos os campos")
     }
 
+    if (nome.length < 3) {
+        alert("Nome muito curto")
+    }
+
+    if (!email.includes("@") || !email.includes(".")) {
+        alert("Email inválido")
+    }
+
+    if (senha.length < 6) {
+        alert("Senha deve ter no mínimo 6 caracteres")
+    }
+
+    if (senha != confirmar) {
+        alert("Senhas não coincidem")
+    }
+
+    else{
+        alert("Cadastro realizado")
+    }
+    
+}
 </script>
 
 </html>

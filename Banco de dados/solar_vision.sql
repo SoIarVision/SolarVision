@@ -38,7 +38,7 @@ CREATE TABLE registro ( -- medida
     valorLuminosidade INT,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
     -- fkarduino int, -- qual o arduino 
-    -- constraint primary key (idRegistro,fkarduino), 
+    -- constraint primary key (fkarduino), 
     -- constraint arduinofk foreign key (fkarduino) references arduino (idarduino),
     data_registro datetime default current_timestamp
     
