@@ -1,0 +1,95 @@
+
+
+/* ================= HEADER ================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background: #b7b5bb;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+    position: absolute;
+    left: 20px;
+    width: 100px;
+    height: 75px;
+    border-radius: 40%;
+}
+
+.titulo {
+    margin: 0;
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    background-color: #F54F00;
+    padding: 0.7%;
+    border-radius: 5%;
+    color: #FFFFFF;
+}
+
+/* ================= ANCHORS ================= */
+
+.anchor {
+    position: absolute;
+    right: 30px;
+
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.anchor a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    transition: 0.2s;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.anchor a:hover {
+    background: #F54F00;
+    transform: translateY(-2px);
+}
+
+
+body {
+    margin: 0;
+
+    padding-top: 90px;
+
+    background-color: rgba(5, 10, 60);
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+    .dashboard {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .grafico {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 500px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
+
