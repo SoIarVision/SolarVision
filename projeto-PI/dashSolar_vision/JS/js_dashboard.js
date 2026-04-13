@@ -148,3 +148,5 @@ new Chart(ctx_linha, {
 );
 
 /* verificações de variável */
+
+/* CRIAR UM FOR PARA ALERT CASO TENHAM 4 LEITURAS SEQUENCIAIS COM DIFERENCÇA GRANDE =150 ENTRE SENSORES    */
