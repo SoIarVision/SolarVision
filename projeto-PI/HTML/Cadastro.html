@@ -59,9 +59,11 @@ function cadastrar() {
     let email = val_email.value.trim()
     let senha = val_senha.value.trim()
     let confirmar = val_confirmar.value.trim()
-
+    let erros = false
+    
     if (nome == "" || email == "" || senha == "" || confirmar == "") {
         alert("Preencha todos os campos")
+        erros = true
     }
 
     if (nome.length < 3) {
@@ -70,17 +72,20 @@ function cadastrar() {
 
     if (!email.includes("@") || !email.includes(".")) {
         alert("Email inválido")
+        erros = true
     }
 
     if (senha.length < 6) {
         alert("Senha deve ter no mínimo 6 caracteres")
+        erros = true
     }
 
     if (senha != confirmar) {
         alert("Senhas não coincidem")
+        erros = true
     }
 
-    else{
+    if (erros == false) {
         alert("Cadastro realizado")
     }
     

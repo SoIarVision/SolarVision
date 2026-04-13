@@ -14,55 +14,64 @@
         <h1 class="titulo">SolarVision</h1>
 
         <div class="anchor">
-        <a href="site.html">Home</a>
-        <a href="">Sobre</a>
-        <a href="Calculadora-SP_2.html">Calculadora</a>
-        <a href="Cadastro.html">Cadastro</a>
-        <a href="Login.html">Login</a>
+            <a href="site.html">Home</a>
+            <a href="">Sobre</a>
+            <a href="Calculadora-SP_2.html">Calculadora</a>
+            <a href="Cadastro.html">Cadastro</a>
+            <a href="Login.html">Login</a>
+            
         </div>
-    
+
     </header>
 
     <div id="div_cadastro" class="container">
         <h1>Login</h1>
-        
+
         <div class="input_box">
             <span>Email</span>
             <input type="text" id="val_email" placeholder=" ">
         </div>
-        
+
         <div class="input_box">
             <span>Senha</span>
             <input type="text" id="val_senha" placeholder=" ">
         </div>
-        
+
         <button onclick="logar()">Logar</button>
         <br><br>
     </div>
-    
+
 </body>
 
 <script>
-function logar() {
-    let email = val_email.value.trim()
-    let senha = val_senha.value.trim()
+    function logar() {
+        let email = val_email.value.trim()
+        let senha = val_senha.value.trim()
+        let erros = false
 
-    if (email == "" || senha == "") {
-        alert("Preencha todos os campos")
+        if (email == "" || senha == "") {
+            alert("Preencha todos os campos")
+            erros = true
+        }
+
+        if (!email.includes("@") || !email.includes(".")) {
+            alert("Email inválido")
+            erros = true
+        }
+
+        if (senha.length < 6) {
+            alert("Senha muito curta (mín 6)")
+            erros = true
+        }
+
+        if (erros == false) {
+            alert("Login OK")
+            window.location = "../dashSolar_vision/charjs.html"
+        } 
+
     }
 
-    if (!email.includes("@") || !email.includes(".")) {
-        alert("Email inválido")
-    }
 
-    if (senha.length < 6) {
-        alert("Senha muito curta (mín 6)")
-    }
-    else{
-        alert("Login OK")
-    }
-    
-}
 </script>
 
 </html>
