@@ -1,13 +1,20 @@
 CREATE DATABASE solar_Vision;
 USE solar_Vision;
 
+create table placa (
+idplaca int primary key auto_increment ,
+fkempresa int , constraint fkempresaplaca foreign key (fkempresa) references empresan(idempresa),
+localizacao varchar (30), 
+tamanho_placa varchar (40)); 
 
 CREATE TABLE arduino( -- arduino
-	idarduino INT PRIMARY KEY AUTO_INCREMENT,
-    limpo int, constraint cklimpo check (limpo in (1,0)),   -- 0 é o que vai ser sujo e 1 é o limpo 
-    placa varchar (30) , -- qual a placa q ele esta
-    fkempresaarduino int , -- qual a empresa 
-    constraint fkdaempresa foreign key (fkempresaarduino) references empresa(idempresa)
+	idarduino INT AUTO_INCREMENT,
+    tipo varchar (8), constraint cklimpo check (tipo in ('Controle','Ideal')),    -- 
+    fkplaca int , -- qual a placa q ele esta - aqui 
+    fkregistro int,
+    constraint primary key (idarduino,fkplaca) , 
+    constraint fkdaplaca foreign key (fkplaca) references placa(idplaca),
+    constraint foreign key (fkregistro) references registro(idRegistro)
 );
 
 CREATE TABLE empresa( -- empresa
@@ -37,9 +44,9 @@ CREATE TABLE registro ( -- medida
     idRegistro INT Primary key auto_increment,
     valorLuminosidade INT,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
-    -- fkarduino int, -- qual o arduino 
-    -- constraint primary key (idRegistro,fkarduino), 
-    -- constraint arduinofk foreign key (fkarduino) references arduino (idarduino),
+     fkarduino int, -- qual o arduino 
+     constraint primary key (idRegistro,fkarduino), 
+    constraint arduinofk foreign key (fkarduino) references arduino (idarduino),
     data_registro datetime default current_timestamp
     
 );
@@ -55,13 +62,24 @@ insert into usuario (nome,cpf,contato,email,fkempresa,senha) values
 ('Leonardo Pires','67044302901','11989456032','leonardoresp@gmail.com',1,'leopiresmk'),
 ('Manoela Albuquerque','23400192454',null,'manoelaalb@gmail.com',2,'manoelaalbufd');
 
-insert into arduino (limpo,placa,fkempresaarduino) values 
-('1','placaA',1),
-('0','placaA',1),
-('1','placaB',1),
-('0','placaB',1), 
-('1','placaAED',2), 
-('0','placaAED',2);
+insert into arduino (tipo,fkplaca,fkregistro) values 
+('Controle',1,1),
+('Ideal',1,2);
+
+
+insert into registro (valorLuminosidade) value (700),(800);
+insert into placa (fkempresa) values (1),(2);
+
+
+select e.nome as empresa , u.nome 'Funcionário Responsável' , p.localizacao as 'Localizacao da Placa' , a.tipo as 'Tipo de Dado' , 
+r.valorLuminosidade as 'Registro' from empresa as e join usuario as u on u.fkempresa = e.idempresa 
+join placa as p  on p.fkempresa = e.idempresa 
+join arduino as a on a.fkplaca = p.idplaca 
+join registro as r on a.fkregistro = r.idRegistro ; 
+
+
+
+
 
 select e.nome as 'Empresa', u.nome 'Funcionário Responsável', u.email from empresa as e join usuario as u on fkempresa = idempresa
 where fkempresa >= 0; 
