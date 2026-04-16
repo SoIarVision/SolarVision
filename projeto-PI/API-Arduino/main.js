@@ -50,13 +50,39 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorLuminosidade = parseInt(valores[0]);
+        var sensorLuminosidade = parseInt(valores[0]);
 
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorLuminosidade.push(sensorLuminosidade);
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
+
+            // CRIANDO LOOP
+            
+            for(let i = 1; i <= 6; i++){
+
+                if(i == 1){
+
+                    sensorLuminosidade += 10
+
+                }else if(i == 2){
+                    sensorLuminosidade += 20
+
+                } else if(i == 3){
+
+                    sensorLuminosidade += 2
+                }else if(i == 4){
+                    sensorLuminosidade -= 100
+                } else if(i == 5){
+                    sensorLuminosidade -= 80
+                }else if(i == 6){
+                    sensorLuminosidade -= 20
+                }
+            
+
+
+            
 
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
@@ -66,6 +92,7 @@ const serial = async (
             console.log("valores inseridos no banco: ", sensorLuminosidade);
 
         }
+    }
 
     });
 
