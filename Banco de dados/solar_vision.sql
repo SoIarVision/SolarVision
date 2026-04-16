@@ -1,14 +1,5 @@
-CREATE DATABASE solar_Vision;
-USE solar_Vision;
-
-
-CREATE TABLE arduino( -- arduino
-	idarduino INT PRIMARY KEY AUTO_INCREMENT,
-    limpo int, constraint cklimpo check (limpo in (1,0)),   -- 0 é o que vai ser sujo e 1 é o limpo 
-    placa varchar (30) , -- qual a placa q ele esta
-    fkempresaarduino int , -- qual a empresa 
-    constraint fkdaempresa foreign key (fkempresaarduino) references empresa(idempresa)
-);
+CREATE DATABASE solar_vision;
+USE solar_vision;
 
 CREATE TABLE empresa( -- empresa
 	idempresa INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,6 +9,14 @@ CREATE TABLE empresa( -- empresa
     email varchar(80),
     endereco varchar (80), 
     senha varchar (30)
+);
+
+CREATE TABLE arduino( -- arduino
+	idarduino INT PRIMARY KEY AUTO_INCREMENT,
+    limpo int, constraint cklimpo check (limpo in (1,0)),   -- 0 é o que vai ser sujo e 1 é o limpo 
+    placa varchar (30) , -- qual a placa q ele esta
+    fkempresaarduino int , -- qual a empresa 
+    constraint fkdaempresa foreign key (fkempresaarduino) references empresa(idempresa)
 );
 
 create table usuario( 
@@ -65,9 +64,3 @@ insert into arduino (limpo,placa,fkempresaarduino) values
 
 select e.nome as 'Empresa', u.nome 'Funcionário Responsável', u.email from empresa as e join usuario as u on fkempresa = idempresa
 where fkempresa >= 0; 
-
-select valorLuminosidade,data_registro,nome,idarduino from registro
- join arduino on fkarduino = idarduino join empresa on idempresa = fkempresaarduino;
-
-
-
