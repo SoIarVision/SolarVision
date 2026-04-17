@@ -1,3 +1,4 @@
+DROP DATABASE solar_vision;
 CREATE DATABASE solar_vision;
 USE solar_vision;
 
@@ -30,33 +31,28 @@ localizacao varchar (30),
 tamanho_placa varchar (40)
 ); 
 
-CREATE TABLE grupo_sensores( -- arduino
+CREATE TABLE sensores( -- arduino
 	id_grupo INT AUTO_INCREMENT,
     tipo varchar (8), constraint ck_limpo check (tipo in ('Controle','Ideal')),    -- 
     fk_placa int , -- qual a placa q ele esta - aqui 
-    fk_registro int,
     constraint primary key (id_grupo,fk_placa) , 
-    constraint fkdaplaca foreign key (fk_placa) references placa(id_placa),
-    constraint foreign key (fk_registro) references registro(id_registro)
-);
-
+    constraint fkdaplaca foreign key (fk_placa) references placa(id_placa)
+    );
 
 CREATE TABLE registro ( -- medida 
-    id_registro INT Primary key auto_increment,
+    id_registro INT auto_increment,
     valorLuminosidade INT,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
 	fkarduino int, -- qual o arduino 
 	constraint primary key (id_registro , fkarduino), 
-    constraint arduinofk foreign key (fkarduino) references grupo_sensores(id_grupo),
+    constraint arduinofk foreign key (fkarduino) references sensores(id_grupo),
     data_registro datetime default current_timestamp
-);
+)auto_increment = 0;
 
-drop table registro;
-
-insert into empresa (nome,cnpj,contato,email,endereco,senha) values 
-('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350','bydenergy.'),
-('Complexo Janaúva','10454392321','11970654921','complexojanauva@gmail.com','Rua Manoel Jardim 3456 ','complexojanauva'),
-('Samsung','23403291232','11979065932','samsungcontato@gmail.com',NULL,'samsungbasic');
+insert into empresa (nome,cnpj,contato,email,endereco) values 
+('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350'),
+('Complexo Janaúva','10454392321','11970654921','complexojanauva@gmail.com','Rua Manoel Jardim 3456 '),
+('Samsung','23403291232','11979065932','samsungcontato@gmail.com',NULL);
 
  
  
@@ -64,20 +60,26 @@ insert into usuario (nome,cpf,contato,email,fk_empresa,senha) values
 ('Leonardo Pires','67044302901','11989456032','leonardoresp@gmail.com',1,'leopiresmk'),
 ('Manoela Albuquerque','23400192454',null,'manoelaalb@gmail.com',2,'manoelaalbufd');
 
-insert into grupo_sensores (tipo,fk_placa,fk_registro) values 
-('Controle',1,1),
-('Ideal',1,2);
+insert into placa (fk_empresa) values 
+(1),
+(2);
+
+insert into sensores (tipo,fk_placa) values 
+('Controle',1),
+('Ideal',1);
 
 
-insert into registro (valorLuminosidade) value (700),(800);
-insert into placa (fk_empresa) values (1),(2);
+insert into registro (valorLuminosidade, fkarduino) values 
+(700, 1),
+(800, 1);
 
 
-select e.nome as empresa , u.nome 'Funcionário Responsável' , p.localizacao as 'Localizacao da Placa' , a.tipo as 'Tipo de Dado' , 
-r.valorLuminosidade as 'Registro' from empresa as e join usuario as u on u.fk_empresa = e.id_empresa 
+select e.nome as empresa , u.nome 'Funcionário Responsável' , p.localizacao as 'Localizacao da Placa' , s.tipo as 'Tipo de Dado' , 
+r.valorLuminosidade as 'Registro' from empresa as e 
+join usuario as u on u.fk_empresa = e.id_empresa 
 join placa as p  on p.fk_empresa = e.id_empresa 
-join arduino as a on a.fk_placa = p.id_placa 
-join registro as r on a.fk_registro = r.id_registro ; 
+join sensores as s on s.fk_placa = p.id_placa 
+join registro as r on r.fkarduino = s.id_grupo ; 
 
 select e.nome as 'Empresa', u.nome 'Funcionário Responsável', u.email from empresa as e join usuario as u on fk_empresa = id_empresa
-where fk_empresa >= 0; 
+where fk_empresa >= 0;
