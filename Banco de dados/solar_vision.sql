@@ -33,15 +33,17 @@ permissao tinyint default(0) -- se for 0 responsavel , se for 1 adm
 
 
 CREATE TABLE registro ( -- medida 
-    idRegistro INT Primary key auto_increment,
+    idRegistro INT auto_increment,
+    fkarduino int, -- qual o arduino 
+    constraint primary key (idRegistro, fkarduino), 
     valorLuminosidade INT,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
-    -- fkarduino int, -- qual o arduino 
-    -- constraint primary key (fkarduino), 
-    -- constraint arduinofk foreign key (fkarduino) references arduino (idarduino),
+    constraint arduinofk foreign key
+    (fkarduino) references arduino (idarduino),
     data_registro datetime default current_timestamp
-    
 );
+
+drop table registro;
 
 insert into empresa (nome,cnpj,contato,email,endereco,senha) values 
 ('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350','bydenergy.'),
