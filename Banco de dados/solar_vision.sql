@@ -1,4 +1,3 @@
-DROP DATABASE solar_vision;
 CREATE DATABASE solar_vision;
 USE solar_vision;
 
@@ -42,11 +41,11 @@ CREATE TABLE sensores( -- arduino
 CREATE TABLE registro ( -- medida 
     id_registro INT auto_increment,
     valorLuminosidade INT,
-    CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
 	fkarduino int, -- qual o arduino 
+	data_registro datetime default current_timestamp,
+    CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
 	constraint primary key (id_registro , fkarduino), 
-    constraint arduinofk foreign key (fkarduino) references sensores(id_grupo),
-    data_registro datetime default current_timestamp
+    constraint arduinofk foreign key (fkarduino) references sensores(id_grupo)
 )auto_increment = 0;
 
 insert into empresa (nome,cnpj,contato,email,endereco) values 
@@ -66,6 +65,10 @@ insert into placa (fk_empresa) values
 
 insert into sensores (tipo,fk_placa) values 
 ('Controle',1),
+('Controle',1),
+('Controle',1),
+('Ideal',1),
+('Ideal',1),
 ('Ideal',1);
 
 
