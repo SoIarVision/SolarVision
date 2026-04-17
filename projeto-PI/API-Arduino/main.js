@@ -64,7 +64,7 @@ const serial = async (
 
                 if(i == 1){
 
-                    sensorLuminosidade += 10
+                sensorLuminosidade += 10
 
                 }else if(i == 2){
                     sensorLuminosidade += 20
