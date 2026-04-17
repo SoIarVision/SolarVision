@@ -51,6 +51,8 @@ CREATE TABLE registro ( -- medida
     data_registro datetime default current_timestamp
 );
 
+drop table registro;
+
 insert into empresa (nome,cnpj,contato,email,endereco,senha) values 
 ('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350','bydenergy.'),
 ('Complexo Janaúva','10454392321','11970654921','complexojanauva@gmail.com','Rua Manoel Jardim 3456 ','complexojanauva'),
