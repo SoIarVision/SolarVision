@@ -19,10 +19,10 @@ const serial = async (
     let poolBancoDados = mysql.createPool(
         {
             host: 'localhost',
-            user: 'aluno',
-            password: 'Sptech#2024',
+            user: 'root',
+            password: 'Sou4luno$ptech',
             database: 'solar_vision',
-            port: 3307
+            port: 3306
         }
     ).promise();
 
@@ -46,6 +46,12 @@ const serial = async (
         console.log(`A leitura do arduino foi iniciada na porta ${portaArduino.path} utilizando Baud Rate de ${SERIAL_BAUD_RATE}`);
     });
 
+    // VARIAVEL PARA CONTROLAR ERROS SEQUENCIAIS
+
+        let erro_senquencial_ideal = 0;
+        let erro_senquencial_controle = 0;
+        let erro_sequenciais = 0;
+
     // processa os dados recebidos do Arduino
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
@@ -55,46 +61,136 @@ const serial = async (
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorLuminosidade.push(sensorLuminosidade);
 
+        
+
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
-            // CRIANDO LOOP
+
+            // VARIAVEIS PARA TRATAR DADOS JÁ AO RECEBER
+
+        let soma_ideal = 0;
+        let soma_controle = 0;
+        let ax1 = 0;
+        let ax2 =0;
+        let ax3 = 0;
+        let ax4 =0;
+        let ax5 = 0;
+        let ax6 = 0;
+        let limite_variacao_sensores = 50;
+        
+
+
+
+            // LOOP PARA MOCKAR DADOS NO BANCO
             
             for(let i = 1; i <= 6; i++){
 
                 if(i == 1){
 
                 sensorLuminosidade += 10
+                soma_ideal += sensorLuminosidade
+
+                 ax1 = sensorLuminosidade
 
                 }else if(i == 2){
+
                     sensorLuminosidade += 20
+                    soma_ideal += sensorLuminosidade
+
+                     ax2 = sensorLuminosidade
 
                 } else if(i == 3){
 
                     sensorLuminosidade += 2
+                    soma_ideal += sensorLuminosidade
+
+                     ax3 = sensorLuminosidade
+
                 }else if(i == 4){
+
                     sensorLuminosidade -= 100
+                    soma_controle += sensorLuminosidade
+
+                     ax4 = sensorLuminosidade
+
                 } else if(i == 5){
+
                     sensorLuminosidade -= 80
+                    soma_controle += sensorLuminosidade
+
+                     ax5 = sensorLuminosidade
+
                 }else if(i == 6){
+
                     sensorLuminosidade -= 20
+                    soma_controle += sensorLuminosidade
+
+                     ax6 = sensorLuminosidade
                 }
+                    
+
             
+            // este insert irá inserir os dados na tabela "registro" e indicará se a leitura é de um sensor controle ou ideal através da fk
 
-
-            
-
-            // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO registro (valorLuminosidade) VALUES (?)',
-                [sensorLuminosidade]
+            'INSERT INTO registro (valorLuminosidade, fkarduino) VALUES (?, ?)',
+            [sensorLuminosidade, i]
             );
             console.log("valores inseridos no banco: ", sensorLuminosidade);
 
         }
-    }
 
-    });
+        // Verificar erros e demonstrar no banco
+        // Se não tem erro, resetar a variável de erro e atualizar no banco
+
+                        if (Math.abs(ax1 - ax2) > limite_variacao_sensores || Math.abs(ax2 - ax3) > limite_variacao_sensores || Math.abs(ax1 - ax3) > limite_variacao_sensores ){
+                         
+                            erro_senquencial_ideal++
+                         erro_sequenciais++
+
+
+                        } else { erro_senquencial_ideal = 0; 
+
+                            await poolBancoDados.execute(
+                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
+                        ['Em funcionamento', 2] )
+
+                        }
+                        
+
+                        if  (Math.abs(ax4 - ax5) > limite_variacao_sensores || Math.abs(ax5 - ax6) > limite_variacao_sensores || Math.abs(ax4 - ax6) > limite_variacao_sensores ){
+                            erro_senquencial_controle++
+                            erro_sequenciais++
+
+                         } else { erro_senquencial_controle = 0; 
+
+                            await poolBancoDados.execute(
+                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
+                        ['Em funcionamento', 1]  )
+
+                         }
+
+                          // se tem erro atualiza no banco
+
+                 if(erro_senquencial_controle >= 5){
+                    await poolBancoDados.execute(
+                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
+                        ['apresentando falha', 2] 
+                    )
+                 }
+                 if(erro_senquencial_ideal >= 5){
+                    await poolBancoDados.execute(
+                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
+                        ['apresentando falha', 1] 
+                    )
+                 }
+        // VARIAVEL PARA CALCULAR EFICIENCIA em %
+        let eficiencia = (soma_controle / soma_ideal)*100;
+    };
+
+
+});
 
     // evento para lidar com erros na comunicação serial
     arduino.on('error', (mensagem) => {
