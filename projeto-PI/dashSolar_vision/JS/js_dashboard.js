@@ -89,6 +89,17 @@ for(let i = 1; i <=30 ; i++){
 
 /* dados[4] = 50 */
 
+   function trocarGrafico() {
+    let graficoSelecionado = selectGrafico.value;
+
+    if (graficoSelecionado == "grafico_stacked") {
+        grafico_stacked.style.display = "block";
+        eficiencia_por_dia.style.display = "none";
+    } else if (graficoSelecionado == "eficiencia_por_dia") {
+        grafico_stacked.style.display = "none";
+        eficiencia_por_dia.style.display = "block";
+    }
+}
 
 /* CRIAÇÃO E CONFIGURAÇÃO DOS GRÁFICOS */
 
