@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+/* ===================== Base ===================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    color: #0f172a;
+}
+
+h1,
+h2,
+h3,
+.nav-logo {
+    font-family: 'Syne', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ===================== Navbar ===================== */
+
+.navbar {
+    background: #081535;
+    border-bottom: 1px solid #1a3580;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+
+.nav-conteudo {
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-logo {
+    margin-right: auto;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.nav-logo span {
+    color: #f97316;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    transition: color 0.25s;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #f97316;
+    transition: width 0.25s;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links .nav-login,
+.nav-links .nav-cadastro,
+.nav-links .nav-logado {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+}
+
+.nav-links .nav-login {
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.nav-links .nav-login:hover {
+    border-color: #f97316;
+    color: #f97316;
+    background: transparent;
+}
+
+.nav-links .nav-login::after,
+.nav-links .nav-cadastro::after,
+.nav-links .nav-logado::after {
+    display: none;
+}
+
+.nav-links .nav-cadastro {
+    background: #f97316;
+    color: #ffffff;
+    border: 1.5px solid #f97316;
+}
+
+.nav-links .nav-cadastro:hover {
+    background: #c45c0e;
+    border-color: #c45c0e;
+    transform: translateY(-2px);
+}
+
+.nav-links .nav-logado {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-links .nav-logado:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+/* ===================== Hero / Principal ===================== */
+
+.hero-pag {
+    height: 91vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffff;
+
+    background-image:
+        linear-gradient(rgba(26, 53, 128, 0.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26, 53, 128, 0.55) 1px, transparent 1px);
+    background-size: 60px 60px;
+}
+
+.hero-pag::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-pag::after {
+    content: '';
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-conteudo {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-conteudo h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+.hero-sombra {
+    text-shadow: 4px 4px 15px rgba(0, 0, 0);
+}
+
+.hero-accent {
+    color: #f97316;
+}
+
+.hero-conteudo p {
+    margin: 22px 0 32px;
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0);
+    line-height: 1.75;
+    letter-spacing: 0.3px;
+}
+
+.hero-btn {
+    padding: 13px 32px;
+    border: none;
+    background: #f97316;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.4px;
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.35);
+}
+
+.hero-btn:hover {
+    background: #c45c0e;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(249, 115, 22, 0.45);
+}
+
+/* ===================== Sobre ===================== */
+
+.sobre-pag {
+    padding: 90px 0;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sobre-grid {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.sobre-texto {
+    flex: 1;
+}
+
+.sobre-texto h2 {
+    font-size: 2.4rem;
+    margin-bottom: 22px;
+    color: #081535;
+    position: relative;
+    padding-bottom: 14px;
+}
+
+.sobre-texto h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 52px;
+    height: 3px;
+    background: #f97316;
+    border-radius: 2px;
+}
+
+.sobre-texto p {
+    line-height: 1.75;
+    letter-spacing: 0.3px;
+    color: #475569;
+    margin-bottom: 16px;
+    font-size: 0.97rem;
+}
+
+/* ===================== Stat Cards ===================== */
+
+.sobre-stats {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.stat-card {
+    background: #0a1840;
+    color: white;
+    padding: 36px 28px;
+    border-radius: 14px;
+    text-align: center;
+    transition: transform 0.28s, border-color 0.28s, background 0.28s, box-shadow 0.28s;
+    border: 2px solid #112266;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(8, 21, 53, 0.2);
+}
+
+.stat-number {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 6px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+}
+
+.stat-card:hover {
+    background: #0a1840;
+    border-color: #f97316;
+    transform: translateY(-6px);
+    box-shadow: 0 10px 32px rgba(249, 115, 22, 0.18);
+}
+
+/* ===================== Processo ===================== */
+
+.processo-pag {
+    padding: 90px 0;
+    text-align: center;
+    background: #f5f7fa;
+}
+
+.processo-titulo {
+    font-size: 2.4rem;
+    margin-bottom: 14px;
+    color: #081535;
+}
+
+.processo-titulo::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 3px;
+    background: #f97316;
+    border-radius: 2px;
+    margin: 14px auto 40px;
+}
+
+.processo-box-all {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+}
+
+.processo-box {
+    background: #0a1840;
+    color: white;
+    padding: 32px 26px;
+    border-radius: 14px;
+    width: 300px;
+    transition: transform 0.28s, border-color 0.28s, background 0.28s, box-shadow 0.28s;
+    border: 2px solid #112266;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(8, 21, 53, 0.2);
+}
+
+.processo-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #f97316;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.processo-box h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+.processo-box p {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+}
+
+.processo-box:hover {
+    background: #0a1840;
+    border-color: #f97316;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 36px rgba(249, 115, 22, 0.2);
+}
+
+.processo-seta {
+    font-size: 1.6rem;
+    margin: 0 12px;
+    color: #1a3580;
+    align-self: center;
+    flex-shrink: 0;
+}
+
+/* ===================== Footer ===================== */
+
+footer {
+    background: #081535;
+    text-align: center;
+    padding: 24px 20px;
+    border-top: 1px solid #1a3580;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}

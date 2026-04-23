@@ -9,21 +9,22 @@
 </head>
 
 <body>
-    <header>
-        <img src="../ASSETS/TESTE.png" alt="" class="logo">
-        <h1 class="titulo">SolarVision</h1>
+    <nav class="navbar">
+        <div class="container nav-conteudo">
 
-        <div class="anchor">
-            <a href="site.html">Home</a>
-            <a href="">Sobre</a>
-            <a href="Calculadora-SP_2.html">Calculadora</a>
-            <a href="Cadastro.html">Cadastro</a>
-            <a href="Login.html">Login</a>
+            <div class="nav-logo">Solar<span>Vision</span></div>
+
+            <div class="nav-links">
+                <a href="Home.html" class="nav-ativo">Home</a>
+                <a href="Home.html#Sobre">Sobre</a>
+                <a href="Calculadora-SP_2.html">Simulador Financeiro</a>
+                <a href="Login.html" class="nav-login">Logar</a>
+                <a href="Cadastro.html" class="nav-cadastro">Cadastrar</a>
+            </div>
         </div>
+    </nav>
 
-    </header>
-
-    <div id="div_cadastro" class="container">
+    <div id="div_cadastro" class="box">
         <h1>Cadastro - Empresa</h1>
 
         <div class="input_box">
@@ -53,43 +54,43 @@
 </body>
 
 <script>
-function cadastrar() {
+    function cadastrar() {
 
-    let nome = val_nome.value.trim()
-    let email = val_email.value.trim()
-    let senha = val_senha.value.trim()
-    let confirmar = val_confirmar.value.trim()
-    let erros = false
-    
-    if (nome == "" || email == "" || senha == "" || confirmar == "") {
-        alert("Preencha todos os campos")
-        erros = true
-    }
+        let nome = val_nome.value.trim()
+        let email = val_email.value.trim()
+        let senha = val_senha.value.trim()
+        let confirmar = val_confirmar.value.trim()
+        let erros = false
 
-    if (nome.length < 3) {
-        alert("Nome muito curto")
-    }
+        if (nome == "" || email == "" || senha == "" || confirmar == "") {
+            alert("Preencha todos os campos")
+            erros = true
+        }
 
-    if (!email.includes("@") || !email.includes(".")) {
-        alert("Email inválido")
-        erros = true
-    }
+        if (nome.length < 3) {
+            alert("Nome muito curto")
+        }
 
-    if (senha.length < 6) {
-        alert("Senha deve ter no mínimo 6 caracteres")
-        erros = true
-    }
+        if (!email.includes("@") || !email.includes(".")) {
+            alert("Email inválido")
+            erros = true
+        }
 
-    if (senha != confirmar) {
-        alert("Senhas não coincidem")
-        erros = true
-    }
+        if (senha.length < 6) {
+            alert("Senha deve ter no mínimo 6 caracteres")
+            erros = true
+        }
 
-    if (erros == false) {
-        alert("Cadastro realizado")
+        if (senha != confirmar) {
+            alert("Senhas não coincidem")
+            erros = true
+        }
+
+        if (erros == false) {
+            alert("Cadastro realizado")
+        }
+
     }
-    
-}
 </script>
 
 </html>
