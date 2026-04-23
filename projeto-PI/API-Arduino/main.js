@@ -78,6 +78,8 @@ const serial = async (
         let ax5 = 0;
         let ax6 = 0;
         let limite_variacao_sensores = 50;
+
+        let indicacao_sensor = 0; // vai enviar o registro para o grupo certo do sensor
         
 
 
@@ -93,12 +95,16 @@ const serial = async (
 
                  ax1 = sensorLuminosidade
 
+                 indicacao_sensor = 2;
+
                 }else if(i == 2){
 
                     sensorLuminosidade += 20
                     soma_ideal += sensorLuminosidade
 
                      ax2 = sensorLuminosidade
+
+                     indicacao_sensor = 2;
 
                 } else if(i == 3){
 
@@ -107,12 +113,16 @@ const serial = async (
 
                      ax3 = sensorLuminosidade
 
+                     indicacao_sensor = 2;
+
                 }else if(i == 4){
 
                     sensorLuminosidade -= 100
                     soma_controle += sensorLuminosidade
 
                      ax4 = sensorLuminosidade
+
+                     indicacao_sensor = 1;
 
                 } else if(i == 5){
 
@@ -121,12 +131,15 @@ const serial = async (
 
                      ax5 = sensorLuminosidade
 
+                     indicacao_sensor = 1;
+
                 }else if(i == 6){
 
                     sensorLuminosidade -= 20
                     soma_controle += sensorLuminosidade
 
                      ax6 = sensorLuminosidade
+                     indicacao_sensor = 1;
                 }
                     
 
@@ -135,7 +148,7 @@ const serial = async (
 
             await poolBancoDados.execute(
             'INSERT INTO registro (valorLuminosidade, fkarduino) VALUES (?, ?)',
-            [sensorLuminosidade, i]
+            [sensorLuminosidade, indicacao_sensor]
             );
             console.log("valores inseridos no banco: ", sensorLuminosidade);
 
@@ -153,8 +166,12 @@ const serial = async (
                         } else { erro_senquencial_ideal = 0; 
 
                             await poolBancoDados.execute(
-                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
+                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['Em funcionamento', 2] )
+                            
+                        await poolBancoDados.execute(
+                        'UPDATE sensores SET valor_leitura = (?) WHERE id_grupo = (?)',
+                        [soma_ideal, 2]  )
 
                         }
                         
@@ -166,8 +183,12 @@ const serial = async (
                          } else { erro_senquencial_controle = 0; 
 
                             await poolBancoDados.execute(
-                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
+                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['Em funcionamento', 1]  )
+
+                            await poolBancoDados.execute(
+                        'UPDATE sensores SET valor_leitura = (?) WHERE id_grupo = (?)',
+                        [soma_controle, 1]  )
 
                          }
 
@@ -175,18 +196,25 @@ const serial = async (
 
                  if(erro_senquencial_controle >= 5){
                     await poolBancoDados.execute(
-                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
-                        ['apresentando falha', 2] 
+                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
+                        ['apresentando falha', 1] 
                     )
                  }
                  if(erro_senquencial_ideal >= 5){
                     await poolBancoDados.execute(
-                        'UPDATE arduino SET status = (?) WHERE idarduino = ?',
-                        ['apresentando falha', 1] 
+                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
+                        ['apresentando falha', 2] 
                     )
                  }
         // VARIAVEL PARA CALCULAR EFICIENCIA em %
         let eficiencia = (soma_controle / soma_ideal)*100;
+        
+        await poolBancoDados.execute(
+            'UPDATE placa SET eficiencia = (?) WHERE id_placa = (?)',
+            [eficiencia, 1]
+        )
+
+        
     };
 
 

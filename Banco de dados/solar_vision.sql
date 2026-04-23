@@ -8,6 +8,7 @@ idcontato int primary key auto_increment,
 email varchar (100), 
 telprin varchar (11), 
 telreserva varchar (13));
+
 create table endereco (
 idendereco int primary key auto_increment, 
 cep char (8) , 
@@ -41,6 +42,7 @@ permissao tinyint default(0),-- se for 0 responsavel , se for 1 adm
 create table placa (
 id_placa int primary key auto_increment ,
 fk_empresa int , constraint fk_empresaplaca foreign key (fk_empresa) references empresa(id_empresa),
+eficiencia INT,
 localizacao varchar (30), 
 tamanho_placa varchar (40)
 ); 
@@ -48,15 +50,24 @@ tamanho_placa varchar (40)
 CREATE TABLE sensores( -- arduino
 	id_grupo INT AUTO_INCREMENT,
     tipo varchar (8), constraint ck_limpo check (tipo in ('Controle','Ideal')),    -- 
-    fk_placa int , -- qual a placa q ele esta - aqui 
+    fk_placa int , -- qual a placa q ele esta - aqui
+    status_sensor VARCHAR(50),
+    valor_leitura INT,
     constraint primary key (id_grupo,fk_placa) , 
     constraint fkdaplaca foreign key (fk_placa) references placa(id_placa)
     );
+    
+INSERT INTO placa (id_placa) values 
+(1);
+
+INSERT INTO sensores (id_grupo, tipo, fk_placa) values
+(1, 'controle', 1),
+(2, 'ideal', 1);
 
 CREATE TABLE registro ( -- medida 
     id_registro INT auto_increment,
     valorLuminosidade INT,
-	fkarduino int, -- qual o arduino 
+	fkarduino int, -- qual o arduino  mudar o nome
 	data_registro datetime default current_timestamp,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
 	constraint primary key (id_registro , fkarduino), 
@@ -119,3 +130,5 @@ join registro as r on r.fkarduino = s.id_grupo;
 select e.nome as 'Empresa', u.nome 'Funcionário Responsável',c.email from empresa as e
  join usuario as u on fk_empresa = id_empresa
  join contato as c on c.idcontato = u.fkcontato;
+ 
+ select * from sensores;
