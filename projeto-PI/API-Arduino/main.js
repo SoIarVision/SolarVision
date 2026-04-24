@@ -20,7 +20,7 @@ const serial = async (
         {
             host: 'localhost',
             user: 'root',
-            password: 'Sou4luno$ptech',
+            password: 'Frost0704@',
             database: 'solar_vision',
             port: 3306
         }

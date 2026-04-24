@@ -144,16 +144,16 @@ h3,
 /* ===================== Hero / Principal ===================== */
 
 .hero-pag {
-    height: 91vh;
+    height: 91.5vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: #ffffff;
+    background-color: #0a1840;
 
     background-image:
-        linear-gradient(rgba(26, 53, 128, 0.55) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(26, 53, 128, 0.55) 1px, transparent 1px);
+        linear-gradient(rgba(35, 69, 165, 0.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35, 69, 165, 0.55) 1px, transparent 1px);
     background-size: 60px 60px;
 }
 
@@ -172,7 +172,7 @@ h3,
     transform: translateX(-50%);
     width: 600px;
     height: 300px;
-    background: radial-gradient(ellipse, rgba(249, 115, 22, 0.12) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(249, 115, 22, 0.2) 10%, transparent 70%);
     pointer-events: none;
 }
 
@@ -199,7 +199,7 @@ h3,
 .hero-conteudo p {
     margin: 22px 0 32px;
     font-size: 1.3rem;
-    color: rgba(0, 0, 0);
+    color: rgb(255, 255, 255);
     line-height: 1.75;
     letter-spacing: 0.3px;
 }
