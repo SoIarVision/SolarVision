@@ -45,33 +45,57 @@
 
 <script>
     function logar() {
-        let email = val_email.value.trim()
-        let senha = val_senha.value.trim()
-        let erros = false
 
-        if (email == "" || senha == "") {
-            alert("Preencha todos os campos")
-            erros = true
+        let vazios = ""
+
+        for (let i = 1; i <= 2; i++) {
+
+            let valor = ""
+            let nome = ""
+
+            if (i == 1) {
+                valor = val_email.value.trim()
+                nome = "Email"
+            } else if (i == 2) {
+                valor = val_senha.value.trim()
+                nome = "Senha"
+            }
+
+            if (valor == "") {
+                if (vazios == "") {
+                    vazios += nome
+                }
+                else {
+                    vazios += ", " + nome
+                }
+            }
         }
 
-        if (!email.includes("@") || !email.includes(".")) {
-            alert("Email inválido")
-            erros = true
+        if (vazios != "") {
+            alert("Preencha: " + vazios)
         }
+        else {
+            let email = val_email.value.trim()
+            let senha = val_senha.value.trim()
+            let erros = false
 
-        if (senha.length < 6) {
-            alert("Senha muito curta (mín 6)")
-            erros = true
+            if (!email.includes("@") || !email.includes(".")) {
+                alert("Email inválido")
+                erros = true
+            }
+
+            if (senha.length < 6) {
+                alert("Senha incorreta")
+                erros = true
+            }
+
+            if (!erros) {
+                alert("Login OK")
+                window.location = "../dashSolar_vision/charjs.html"
+
+            }
         }
-
-        if (erros == false ) {
-            alert("Login OK")
-            window.location = "../dashSolar_vision/charjs.html"
-        }
-
     }
-
-
 </script>
 
 </html>

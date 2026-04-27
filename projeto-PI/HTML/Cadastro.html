@@ -56,40 +56,74 @@
 <script>
     function cadastrar() {
 
-        let nome = val_nome.value.trim()
-        let email = val_email.value.trim()
-        let senha = val_senha.value.trim()
-        let confirmar = val_confirmar.value.trim()
-        let erros = false
+        let vazios = ""
 
-        if (nome == "" || email == "" || senha == "" || confirmar == "") {
-            alert("Preencha todos os campos")
-            erros = true
+        for (let i = 1; i <= 4; i++) {
+
+            let valor = ""
+            let nome = ""
+
+            if (i == 1) {
+                valor = val_nome.value.trim()
+                nome = "Nome"
+            }
+            else if (i == 2) {
+                valor = val_email.value.trim()
+                nome = "Email"
+            }
+            else if (i == 3) {
+                valor = val_senha.value.trim()
+                nome = "Senha"
+            }
+            else if (i == 4) {
+                valor = val_confirmar.value.trim()
+                nome = "Confirmar senha"
+            }
+
+            if (valor == "") {
+                if (vazios == "") {
+                    vazios += nome
+                } else {
+                    vazios += ", " + nome
+                }
+            }
         }
 
-        if (nome.length < 3) {
-            alert("Nome muito curto")
+        if (vazios != "") {
+            alert("Preencha: " + vazios)
         }
+        else {
 
-        if (!email.includes("@") || !email.includes(".")) {
-            alert("Email inválido")
-            erros = true
+            let nome = val_nome.value.trim()
+            let email = val_email.value.trim()
+            let senha = val_senha.value.trim()
+            let confirmar = val_confirmar.value.trim()
+            let erros = false
+
+            if (nome.length < 3) {
+                alert("Nome deve conter 3 ou mais letras")
+                erros = true
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                alert("Email inválido")
+                erros = true
+            }
+
+            if (senha.length < 6) {
+                alert("Senha muito fraca")
+                erros = true
+            }
+
+            if (senha != confirmar) {
+                alert("Senhas divergentes")
+                erros = true
+            }
+
+            if (!erros) {
+                alert("Cadastro feito")
+            }
         }
-
-        if (senha.length < 6) {
-            alert("Senha deve ter no mínimo 6 caracteres")
-            erros = true
-        }
-
-        if (senha != confirmar) {
-            alert("Senhas não coincidem")
-            erros = true
-        }
-
-        if (erros == false) {
-            alert("Cadastro realizado")
-        }
-
     }
 </script>
 
