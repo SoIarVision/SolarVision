@@ -147,8 +147,8 @@ const serial = async (
             // este insert irá inserir os dados na tabela "registro" e indicará se a leitura é de um sensor controle ou ideal através da fk
 
             await poolBancoDados.execute(
-            'INSERT INTO registro (valorLuminosidade, fkarduino) VALUES (?, ?)',
-            [sensorLuminosidade, indicacao_sensor]
+            'INSERT INTO registro (valorLuminosidade, fk_grupo, fkplaca) VALUES (?, ?, ?)',
+            [sensorLuminosidade, indicacao_sensor, 1]
             );
             console.log("valores inseridos no banco: ", sensorLuminosidade);
 
@@ -166,11 +166,11 @@ const serial = async (
                         } else { erro_senquencial_ideal = 0; 
 
                             await poolBancoDados.execute(
-                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['Em funcionamento', 2] )
                             
                         await poolBancoDados.execute(
-                        'UPDATE sensores SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
                         [soma_ideal, 2]  )
 
                         }
@@ -183,11 +183,11 @@ const serial = async (
                          } else { erro_senquencial_controle = 0; 
 
                             await poolBancoDados.execute(
-                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['Em funcionamento', 1]  )
 
                             await poolBancoDados.execute(
-                        'UPDATE sensores SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
                         [soma_controle, 1]  )
 
                          }
@@ -196,13 +196,13 @@ const serial = async (
 
                  if(erro_senquencial_controle >= 5){
                     await poolBancoDados.execute(
-                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['apresentando falha', 1] 
                     )
                  }
                  if(erro_senquencial_ideal >= 5){
                     await poolBancoDados.execute(
-                        'UPDATE sensores SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['apresentando falha', 2] 
                     )
                  }
@@ -210,7 +210,7 @@ const serial = async (
         let eficiencia = (soma_controle / soma_ideal)*100;
         
         await poolBancoDados.execute(
-            'UPDATE placa SET eficiencia = (?) WHERE id_placa = (?)',
+            'UPDATE placa SET eficiencia = (?) WHERE idplaca = (?)',
             [eficiencia, 1]
         )
 
