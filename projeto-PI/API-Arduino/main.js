@@ -170,7 +170,7 @@ const serial = async (
                         ['Em funcionamento', 2] )
                             
                         await poolBancoDados.execute(
-                        'UPDATE sensores SET valor_leitura = (?) WHERE id_grupo = (?)',
+                        'UPDATE sensores SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
                         [soma_ideal, 2]  )
 
                         }
@@ -187,7 +187,7 @@ const serial = async (
                         ['Em funcionamento', 1]  )
 
                             await poolBancoDados.execute(
-                        'UPDATE sensores SET valor_leitura = (?) WHERE id_grupo = (?)',
+                        'UPDATE sensores SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
                         [soma_controle, 1]  )
 
                          }

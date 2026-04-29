@@ -132,3 +132,6 @@ select e.nome as 'Empresa', u.nome 'Funcionário Responsável',c.email from empr
  join contato as c on c.idcontato = u.fkcontato;
  
  select * from sensores;
+ select * from placa;
+ select * from registro;
+ 
