@@ -288,3 +288,8 @@ button:last-child:hover {
 .buttontroca:hover {
     border-color: #FFFFFF;
 }
+
+.calculo{
+    align-items: center;
+    color: #848686;
+}
