@@ -153,7 +153,7 @@ h3,
     width: 100%;
     max-width: 580px;
     margin: 40px 16px 40px;
-justify-self: center;
+    justify-self: center;
 }
 
 h1 {
@@ -253,4 +253,23 @@ button:last-child:hover {
     font-size: 15px;
     line-height: 1.7;
     display: none;
+}
+
+.alerta {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-end;
+
+    width: 300px;
+    height: 100px;
+    padding: 10px 4px;
+
+    background-color: #081535;
+    color: white;
+
+    position: absolute;
+    inset-inline-start: 80%;
+    inset-block-start: 80px;
 }

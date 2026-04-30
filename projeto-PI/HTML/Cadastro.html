@@ -23,28 +23,28 @@
             </div>
         </div>
     </nav>
-
+    <div id="div_mensagem" class="alerta"></div>
     <div id="div_cadastro" class="box">
         <h1>Cadastro - Empresa</h1>
 
         <div class="input_box">
             <span>Nome</span>
-            <input type="text" id="val_nome" placeholder=" ">
+            <input type="text" id="val_nome" placeholder="Ex: João">
         </div>
 
         <div class="input_box">
             <span>Email</span>
-            <input type="text" id="val_email" placeholder=" ">
+            <input type="text" id="val_email" placeholder="seuemail@gmail.com">
         </div>
 
         <div class="input_box">
             <span>Senha</span>
-            <input type="password" id="val_senha" placeholder=" ">
+            <input type="password" id="val_senha" placeholder="••••••••">
         </div>
 
         <div class="input_box">
             <span>Confirmar senha</span>
-            <input type="password" id="val_confirmar" placeholder=" ">
+            <input type="password" id="val_confirmar" placeholder="••••••••">
         </div>
 
         <button onclick="cadastrar()">Cadastrar</button>
@@ -90,7 +90,12 @@
         }
 
         if (vazios != "") {
-            alert("Preencha: " + vazios)
+            div_mensagem.innerHTML = `Preencha: ${vazios}`
+            div_mensagem.style.display = "flex"
+            div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+            setTimeout(() => {
+                div_mensagem.style.display = "none"
+            }, 3000);
         }
         else {
 
@@ -101,27 +106,52 @@
             let erros = false
 
             if (nome.length < 3) {
-                alert("Nome deve conter 3 ou mais letras")
+                div_mensagem.innerHTML = "Nome deve conter 3 ou mais letras"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
-            if (!email.includes("@") || !email.includes(".")) {
-                alert("Email inválido")
+            if (!email.includes("@") && !email.includes(".")) {
+                div_mensagem.innerHTML = "Email inválido"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
             if (senha.length < 6) {
-                alert("Senha muito fraca")
+                div_mensagem.innerHTML = "Senha muito fraca"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
             if (senha != confirmar) {
-                alert("Senhas divergentes")
+                div_mensagem.innerHTML = "Senhas divergentes"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
             if (!erros) {
-                alert("Cadastro feito")
+                div_mensagem.innerHTML = "Cadastro feito"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(0, 255, 0)";
+                setTimeout(() => {
+                    window.location = "Login.html"
+                }, 3000);
             }
         }
     }

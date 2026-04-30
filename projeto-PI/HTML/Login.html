@@ -29,12 +29,12 @@
 
         <div class="input_box">
             <span>Email</span>
-            <input type="text" id="val_email" placeholder=" ">
+            <input type="text" id="val_email" placeholder="seuemail@gmail.com">
         </div>
 
         <div class="input_box">
             <span>Senha</span>
-            <input type="text" id="val_senha" placeholder=" ">
+            <input type="password" id="val_senha" placeholder="••••••••">
         </div>
 
         <button onclick="logar()">Logar</button>
@@ -72,27 +72,45 @@
         }
 
         if (vazios != "") {
-            alert("Preencha: " + vazios)
+            div_mensagem.innerHTML = `Preencha: ${vazios}`
+            div_mensagem.style.display = "flex"
+            div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+            setTimeout(() => {
+                div_mensagem.style.display = "none"
+            }, 3000);
         }
         else {
             let email = val_email.value.trim()
             let senha = val_senha.value.trim()
             let erros = false
 
-            if (!email.includes("@") || !email.includes(".")) {
-                alert("Email inválido")
+            if (!email.includes("@") && !email.includes(".")) {
+                div_mensagem.innerHTML = "Email inválido"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
             if (senha.length < 6) {
-                alert("Senha incorreta")
+                div_mensagem.innerHTML = "Senha incorreta"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
             if (!erros) {
-                alert("Login OK")
-                window.location = "../dashSolar_vision/charjs.html"
-
+                div_mensagem.innerHTML = "Login OK"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    window.location = "../dashSolar_vision/charjs.html"
+                }, 3000);
             }
         }
     }
