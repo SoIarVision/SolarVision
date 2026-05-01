@@ -147,6 +147,16 @@
                 erros = true
             }
 
+            if (!/[a-z]/.test(senha) || !/[A-Z]/.test(senha)) {
+                alert("A senha deve ter pelo menos uma letra maiúscula e uma minúscula")
+                erros = true
+            }
+
+            if (!/[#@$*]/.test(senha)) {
+                alert("A senha deve ter pelo menos um caractere especial (@, #, $, *)")
+                erros = true
+            }
+
             if (!erros) {
                 div_mensagem.innerHTML = "Cadastro feito"
                 div_mensagem.style.display = "flex"
