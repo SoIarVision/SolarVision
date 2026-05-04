@@ -11,11 +11,11 @@ CREATE TABLE empresa( -- empresa
 );
 
 create table placa (
-idplaca int primary key auto_increment ,
-fkempresa int , constraint fkempresaplaca foreign key (fkempresa) references empresa(idempresa),
-eficiencia INT,
-localizacao varchar (30),
-descricao VARCHAR(100) /*add descrição*/
+    idplaca int primary key auto_increment ,
+    fkempresa int , constraint fkempresaplaca foreign key (fkempresa) references empresa(idempresa),
+    eficiencia INT,
+    localizacao varchar (30),
+    descricao VARCHAR(100) /*add descrição*/
 ); 
 
 CREATE TABLE grupo_sensor( -- grupo_sensor
@@ -31,14 +31,14 @@ CREATE TABLE grupo_sensor( -- grupo_sensor
 
 
 create table usuario( 
-idusuario int auto_increment primary key , 
-nome varchar (60) not null , 
-cpf char (11) unique,
-contato varchar (15),
-email varchar (60) not null ,
-fkempresa int , -- se é um funcionario responsavel de tal empresa
-constraint empresaresp foreign key (fkempresa) references empresa (idempresa),
-senha varchar (50) not null 
+    idusuario int auto_increment primary key , 
+    nome varchar (60) not null , 
+    cpf char (11) unique,
+    contato varchar (15),
+    email varchar (60) not null ,
+    fkempresa int , -- se é um funcionario responsavel de tal empresa
+    constraint empresaresp foreign key (fkempresa) references empresa (idempresa),
+    senha varchar (50) not null 
 );
 
 
@@ -46,9 +46,9 @@ CREATE TABLE registro ( -- medida
     idRegistro INT auto_increment,
     valorLuminosidade INT,
     CONSTRAINT chk_luminosidade CHECK(valorLuminosidade BETWEEN 0 AND 1023), 
-     fk_grupo int, -- qual o grupo_sensor 
-     fkplaca INT,
-     constraint primary key (idRegistro,fk_grupo,fkplaca), 
+    fk_grupo int, -- qual o grupo_sensor 
+    fkplaca INT,
+    constraint primary key (idRegistro,fk_grupo,fkplaca), 
     constraint grupo_fk foreign key (fk_grupo, fkplaca) references grupo_sensor(id_grupo, fkplaca),
     data_registro datetime default current_timestamp
     
