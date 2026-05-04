@@ -117,7 +117,7 @@
                 erros = true
             }
 
-            if (!email.includes("@") && !email.includes(".")) {
+            if (!email.includes("@") || !email.includes(".")) {
                 div_mensagem.innerHTML = "Email inválido"
                 div_mensagem.style.display = "flex"
                 div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
@@ -148,12 +148,22 @@
             }
 
             if (!/[a-z]/.test(senha) || !/[A-Z]/.test(senha)) {
-                alert("A senha deve ter pelo menos uma letra maiúscula e uma minúscula")
+                div_mensagem.innerHTML = "A senha deve ter pelo menos uma letra maiúscula e uma minúscula"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
             if (!/[#@$*]/.test(senha)) {
-                alert("A senha deve ter pelo menos um caractere especial (@, #, $, *)")
+                div_mensagem.innerHTML = "A senha deve ter pelo menos um caractere especial (@, #, $, *)"
+                div_mensagem.style.display = "flex"
+                div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+                setTimeout(() => {
+                    div_mensagem.style.display = "none"
+                }, 3000);
                 erros = true
             }
 
