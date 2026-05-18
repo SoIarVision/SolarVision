@@ -74,6 +74,24 @@ insert into grupo_sensor (tipo,fkplaca) values
 ('Controle',1),
 ('Ideal',1);
 
+SELECT 
+    p.idplaca AS 'Placa Solar',
+    p.descricao AS 'Descrição da Placa',
+    p.localizacao AS 'Localização',
+    u.nome AS 'Usuário Responsável',
+    e.nome AS 'Empresa',
+    IFNULL(p.eficiencia, 0) AS 'Eficiência da Placa (%)',
+    g.tipo AS 'Tipo do Grupo Sensor',
+    IFNULL(g.status_sensor, 'Sem status registrado') AS 'Status do Grupo Sensor',
+    IFNULL(g.luminosidade_recebida, 0) AS 'Luminosidade Recebida'
+FROM placa AS p
+JOIN empresa AS e 
+    ON p.fkempresa = e.idempresa
+JOIN usuario AS u 
+    ON u.fkempresa = e.idempresa
+JOIN grupo_sensor AS g 
+    ON g.fkplaca = p.idplaca;
+
 
 
 select e.nome as empresa , u.nome 'Funcionário Responsável' , p.localizacao as 'Localizacao da Placa' , a.tipo as 'Tipo de Dado' , 

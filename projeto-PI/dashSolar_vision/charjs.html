@@ -11,11 +11,11 @@
 
 
 </head>
+<main></main>
 
 <body>
 
-
-    <nav class="navbar">
+    <nav class="navbar" id="id_navbar">
         <div class="container nav-conteudo">
 
             <div class="nav-logo">Solar<span>Vision</span></div>
@@ -29,56 +29,82 @@
 
 
 
-    <div class="dashboard">
-        <div class="fileira_cards">
-            <div class="card">
-                <h3> Eficiência atual</h3>
-                <p>80%</p>
-                <h5>Ultima leitura: 12/04/2026</h5>
-            </div>
 
-            <div class="card">
-                <h3> Impacto estimado </h3>
-                <p> R$320,00 </p>
-            </div>
-
-            <div class="card">
-                <h3> Status </h3>
-                <p>Recomenda-se limpeza</p>
-            </div>
-            <div class="card">
-                <h3> Ultima limpeza </h3>
-                <p> 13/05/2026 </p>
-            </div>
-
+    <aside class="sidebar" id="id_sidebar">
+        <div class="sidebar-topo">
+            <div class="nav-logo sidebar-logo">Solar<span>Vision</span></div>
+            <button class="btn-menu-toggle" id="id_fechar">☰</button>
         </div>
 
+        <ul class="menu">
+            <li class="menu-item"><a href="#">📊 <span class="link-text">Dashboard</span></a></li>
+            <li class="menu-item"><a href="#">⚙️ <span class="link-text">Configurações</span></a></li>
+        </ul>
 
-        </script>
-    <div class="container">
-        <div class="dispo_grafico">
-            <div>
-                <select id="selectGrafico" class="buttonTroca" onchange="trocarGrafico()">
-                    <option value="grafico_stacked">Grafico Barra</option>
-                    <option value="eficiencia_por_dia">Grafico Linha</option>
-                </select>
-            </div>
-            <div class="grafico">
-                <canvas id="grafico_stacked"></canvas>
-                <canvas id="eficiencia_por_dia" style="display: none;"></canvas>
-            </div>
-        </div>
-    </div>
-
-        <div class="container">
-            <div class="dispo_grafico">
-            <div class="calculo">
-                <div>Cálculo Eficiência: (Captação sensor controle / Captação sensor ideal) * 100</div> 
-            </div>
-            </div>
+        <div class="sidebar-bottom">
+            <button class="btn-sair" id="btn_sair">🚪 <span class="link-text">Logout</span></button>
         </div>
 
-        <script src="./JS/js_dashboard.js"></script>
+    </aside>
+
+
+
+
+
+    <div class="conteudo_principal" id="id_conteudo_principal">
+
+        <div class="dashboard">
+            <div class="fileira_cards">
+                <div class="card">
+                    <h3> Eficiência atual</h3>
+                    <p>80%</p>
+                    <h5>Ultima leitura: 12/04/2026</h5>
+                </div>
+
+                <div class="card">
+                    <h3> Impacto estimado </h3>
+                    <p> R$320,00 </p>
+                </div>
+
+                <div class="card">
+                    <h3> Status </h3>
+                    <p>Recomenda-se limpeza</p>
+                </div>
+                <div class="card">
+                    <h3> Ultima limpeza </h3>
+                    <p> 13/05/2026 </p>
+                </div>
+
+            </div>
+
+
+
+            <div class="container">
+                <div class="dispo_grafico">
+                    <div>
+                        <select id="selectGrafico" class="buttonTroca" onchange="trocarGrafico()">
+                            <option value="grafico_stacked">Grafico Barra</option>
+                            <option value="eficiencia_por_dia">Grafico Linha</option>
+                        </select>
+                    </div>
+                    <div class="grafico">
+                        <canvas id="grafico_stacked"></canvas>
+                        <canvas id="eficiencia_por_dia" style="display: none;"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="dispo_grafico">
+                    <div class="calculo">
+                        <div>Cálculo Eficiência: (Captação sensor controle / Captação sensor ideal) * 100</div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="./JS/js_dashboard.js"></script>
+
+        </div>
 
 </body>
 
