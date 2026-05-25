@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
 
-
 * {
     margin: 0;
     padding: 0;
@@ -262,14 +261,33 @@ button:last-child:hover {
     justify-content: center;
     justify-self: flex-end;
 
-    width: 300px;
+    width: 250px;
     height: 100px;
-    padding: 10px 4px;
+    padding: 16px 20px;
 
     background-color: #081535;
     color: white;
+    font-size: 20px;
+    font-family: 'Space Grotesk', sans-serif;
 
+    border-radius: 14px;
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(249, 115, 22, 0.15);
     position: absolute;
     inset-inline-start: 80%;
     inset-block-start: 80px;
+
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
