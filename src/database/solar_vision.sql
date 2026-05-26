@@ -13,7 +13,6 @@ CREATE TABLE empresa( -- empresa
 create table placa (
     idplaca int primary key auto_increment ,
     fkempresa int , constraint fkempresaplaca foreign key (fkempresa) references empresa(idempresa),
-    eficiencia INT,
     localizacao varchar (30),
     descricao VARCHAR(100) /*add descrição*/
 ); 
@@ -28,6 +27,12 @@ CREATE TABLE grupo_sensor( -- grupo_sensor
     constraint fkdaplaca foreign key (fkplaca) references placa(idplaca) /*tirei o registro do grupo_sensor*/
 );
 
+CREATE TABLE Eficiencia(
+    idEficiencia INT PRIMARY KEY AUTO_INCREMENT,
+    Valor_Eficiencia INT,
+    fkPlaca INT,
+    FOREIGN KEY(fkPlaca) REFERENCES Placa(idplaca)
+);
 
 
 create table usuario( 
@@ -50,17 +55,26 @@ CREATE TABLE registro ( -- medida
     fkplaca INT,
     constraint primary key (idRegistro,fk_grupo,fkplaca), 
     constraint grupo_fk foreign key (fk_grupo, fkplaca) references grupo_sensor(id_grupo, fkplaca),
-    data_registro datetime default current_timestamp
-    
+    data_registro datetime default current_timestamp    
 );
 
+CREATE TABLE Cargo(
+    idCargo INT PRIMARY KEY AUTO_INCREMENT,
+    Cargo VARCHAR(50),
+    fkUsuario INT,
+    FOREIGN KEY (fkUsuario) REFERENCES usuario(idusuario)
+);
+ 
 insert into empresa (nome,cnpj,contato,email,endereco) values 
 ('BYD ENERGY','04567898765','11967054392','bydenergy@gmail.com','Rua Magalhaes 350'),
 ('Samsung','23403291232','11979065932','samsungcontato@gmail.com',NULL),
-('Complexo Janaúva','10454392321','11970654921','complexojanauva@gmail.com','Rua Manoel Jardim 3456 ')
-;
+('Complexo Janaúva','10454392321','11970654921','complexojanauva@gmail.com','Rua Manoel Jardim 3456 ');
 
- 
+INSERT INTO Cargo(Cargo) VALUE
+ ('Admistrador'),
+ ('Suporte'),
+ ('Gerente'),
+ ('Funcionário');
  
 insert into usuario (nome,cpf,contato,email,fkempresa,senha) values 
 ('Leonardo Pires','67044302901','11989456032','leonardoresp@gmail.com',1,'leopiresmk'),
@@ -92,17 +106,11 @@ JOIN usuario AS u
 JOIN grupo_sensor AS g 
     ON g.fkplaca = p.idplaca;
 
-
-
 select e.nome as empresa , u.nome 'Funcionário Responsável' , p.localizacao as 'Localizacao da Placa' , a.tipo as 'Tipo de Dado' , 
 r.valorLuminosidade as 'Registro' from empresa as e join usuario as u on u.fkempresa = e.idempresa 
 join placa as p  on p.fkempresa = e.idempresa 
 join grupo_sensor as a on a.fkplaca = p.idplaca 
 join registro as r on r.fk_grupo = a.id_grupo ; 
-
-
-
-
 
 select e.nome as 'Empresa', u.nome 'Funcionário Responsável', u.email from empresa as e join usuario as u on fkempresa = idempresa;
 
@@ -111,8 +119,3 @@ FROM registro as r
 JOIN grupo_sensor as g ON r.fk_grupo = g.id_grupo
 JOIN placa as p ON g.fkplaca = p.idplaca
 JOIN empresa as e ON p.fkempresa = e.idempresa;
-
-
-
-
-

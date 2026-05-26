@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Login</title>
 </head>
 
@@ -15,8 +15,8 @@
             <div class="nav-logo">Solar<span>Vision</span></div>
 
             <div class="nav-links">
-                <a href="Home.html" class="nav-ativo">Home</a>
-                <a href="Home.html#Sobre">Sobre</a>
+                <a href="index.html" class="nav-ativo">Home</a>
+                <a href="index.html#Sobre">Sobre</a>
                 <a href="Simulador.html">Simulador Financeiro</a>
                 <a href="Login.html" class="nav-login">Logar</a>
                 <a href="Cadastro.html" class="nav-cadastro">Cadastrar</a>
@@ -47,6 +47,21 @@
 </body>
 
 <script>
+
+    function mostrarErro(mensagem) {
+        div_mensagem.textContent = mensagem;
+        div_mensagem.style.display = 'block';
+        div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+        setTimeout(() => div_mensagem.style.display = 'none', 3000);
+    }
+
+    function mostrarCerto(mensagem) {
+        div_mensagem.textContent = mensagem;
+        div_mensagem.style.display = 'block';
+        div_mensagem.style.borderLeft = "10px solid rgb(0, 255, 0)"
+        setTimeout(() => div_mensagem.style.display = 'none', 3000);
+    }
+
     function logar() {
 
         let vazios = ""
@@ -127,16 +142,28 @@
                 erros = true
             }
 
-
-
-
             if (!erros) {
-                div_mensagem.innerHTML = "Login Realizado"
-                div_mensagem.style.display = "flex"
-                div_mensagem.style.borderLeft = "10px solid rgb(0, 255, 0)"
-                setTimeout(() => {
-                    window.location = "../dashSolar_vision/charjs.html"
-                }, 3000);
+                fetch('/usuarios/autenticar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ emailServer: email, senhaServer: senha })
+                })
+                    .then(function (resposta) {
+                        if (resposta.ok) {
+                            resposta.json().then(function (dados) {
+                                sessionStorage.EMAIL_USUARIO = dados.email;
+                                sessionStorage.NOME_USUARIO = dados.nome;
+                                sessionStorage.ID_USUARIO = dados.id;
+                                mostrarCerto('Login realizado! Redirecionando...');
+                                setTimeout(() => window.location = './dashSolar_vision/charjs.html', 1500);
+                            });
+                        } else {
+                            mostrarErro('Email ou senha inválidos!');
+                        }
+                    })
+                    .catch(function () {
+                        mostrarErro('Erro de conexão. Tente novamente.');
+                    });
             }
         }
     }

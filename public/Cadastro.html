@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Cadastrar</title>
 </head>
 
@@ -15,8 +15,8 @@
             <div class="nav-logo">Solar<span>Vision</span></div>
 
             <div class="nav-links">
-                <a href="Home.html" class="nav-ativo">Home</a>
-                <a href="Home.html#Sobre">Sobre</a>
+                <a href="index.html" class="nav-ativo">Home</a>
+                <a href="index.html#Sobre">Sobre</a>
                 <a href="Simulador.html">Simulador Financeiro</a>
                 <a href="Login.html" class="nav-login">Logar</a>
                 <a href="Cadastro.html" class="nav-cadastro">Cadastrar</a>
@@ -51,11 +51,29 @@
 
         <button onclick="cadastrar()">Cadastrar</button>
         <br><br>
+
+        <div id="cardErro" class="card-erro"></div>
+        <div id="cardCerto" class="cardCerto"></div>
     </div>
 
 </body>
 
 <script>
+
+    function mostrarErro(mensagem) {
+        div_mensagem.textContent = mensagem;
+        div_mensagem.style.display = 'block';
+        div_mensagem.style.borderLeft = "10px solid rgb(255, 0, 0)"
+        setTimeout(() => div_mensagem.style.display = 'none', 3000);
+    }
+
+    function mostrarCerto(mensagem) {
+        div_mensagem.textContent = mensagem;
+        div_mensagem.style.display = 'block';
+        div_mensagem.style.borderLeft = "10px solid rgb(0, 255, 0)"
+        setTimeout(() => div_mensagem.style.display = 'none', 3000);
+    }
+
     function cadastrar() {
 
         let vazios = ""
@@ -168,15 +186,33 @@
             }
 
             if (!erros) {
-                div_mensagem.innerHTML = "Cadastro feito"
-                div_mensagem.style.display = "flex"
-                div_mensagem.style.borderLeft = "10px solid rgb(0, 255, 0)";
-                setTimeout(() => {
-                    window.location = "Login.html"
-                }, 3000);
+                fetch("/usuarios/cadastrar", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        nomeServer: nome,
+                        emailServer: email,
+                        senhaServer: senha,
+                    }),
+                })
+                    .then(function (resposta) {
+                        if (resposta.ok) {
+                            mostrarCerto("Cadastro realizado! Redirecionando...")
+                            setTimeout(() => (window.location = "Login.html"), 2000);
+                        } else {
+                            mostrarErro("Erro ao cadastrar. Tente novamente.");
+                        }
+                    })
+                    .catch(function () {
+                        mostrarErro("Erro de conexão. Tente novamente.");
+                    });
             }
+
         }
+
+
     }
+
 </script>
 
 </html>
