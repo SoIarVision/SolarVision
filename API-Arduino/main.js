@@ -199,15 +199,19 @@ const serial = async (
                         'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['apresentando falha', 1] 
                     )
-                      await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
-                        ['apresentando falha', 1] 
+                    await poolBancoDados.execute(
+                    'INSERT INTO historico_falha (fk_placa, fk_empresa, fk_sensor) VALUES ((?), (?), (?)) ',
+                        [1, 1, 1]
                     )
                  }
                  if(erro_senquencial_ideal >= 5){
                     await poolBancoDados.execute(
                         'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
                         ['apresentando falha', 2] 
+                    )
+                    await poolBancoDados.execute(
+                    'INSERT INTO historico_falha (fk_placa, fk_empresa, fk_sensor) VALUES ((?), (?), (?)) ',
+                    [1, 1, 2]
                     )
                  }
         // VARIAVEL PARA CALCULAR EFICIENCIA em %
