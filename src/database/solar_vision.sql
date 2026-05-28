@@ -101,6 +101,7 @@ INSERT INTO eficiencia (valor_eficiencia, fkPlaca, fkEmpresa) VALUES
 ('92%', 1, 1),
 ('87%', 2, 2);
 
+CREATE VIEW view_detalhamento_sensor AS
 SELECT
     p.idPlaca AS 'Placa Solar',
     p.descricao AS 'Descrição',
@@ -121,6 +122,7 @@ ON ef.fkPlaca = p.idPlaca
 JOIN grupo_sensor g
 ON g.fkPlaca = p.idPlaca;
 
+CREATE VIEW view_registro_ref_empresa AS
 SELECT
     e.nome AS 'Empresa',
     u.nome AS 'Funcionário Responsável',
@@ -138,6 +140,7 @@ ON g.fkPlaca = p.idPlaca
 JOIN registro r
 ON r.fkSensor = g.idSensor;
 
+CREATE VIEW view_funcionario AS
 SELECT
     e.nome AS 'Empresa',
     u.nome AS 'Funcionário',
@@ -149,6 +152,7 @@ ON u.fkEmpresa = e.idEmpresa
 JOIN cargo c
 ON c.idCargo = u.fkCargo;
 
+CREATE VIEW view_registro AS
 SELECT
     r.valor,
     r.data_registro,
