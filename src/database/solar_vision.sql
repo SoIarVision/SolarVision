@@ -78,7 +78,7 @@ INSERT INTO cargo (cargo) VALUES
 INSERT INTO usuario (nome, cpf, contato, email, senha, fkCargo, fkEmpresa) VALUES
 ('Leonardo Pires', '67044302901', '11989456032', 'leonardoresp@gmail.com', 'leopiresmk', 3, 1),
 ('Manoela Albuquerque', '23400192454', '11988887777', 'manoelaalb@gmail.com', 'manoelaalbufd', 2, 2),
-('Lucas', '77777777777','','lucass3neogalvao@gmail.com','lucas12#',1,null);
+('Lucas', '77777777777','','lucass3neogalvao@gmail.com','Lucas12#',1,null);
 
 INSERT INTO placa (fkEmpresa, localizacao, descricao) VALUES
 (1, 'Setor Norte', 'Placa principal da BYD'),
