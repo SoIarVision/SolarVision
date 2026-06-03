@@ -11,3 +11,261 @@ body {
     background: #f5f7fa;
     color: #0f172a;
 }
+
+h1,
+h2,
+h3 {
+    font-family: 'Syne', sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ===================== HERO ===================== */
+
+.hero-pag {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: #0a1840;
+
+    background-image:
+        linear-gradient(rgba(35, 69, 165, 0.55) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35, 69, 165, 0.55) 1px, transparent 1px);
+
+    background-size: 60px 60px;
+}
+
+.hero-conteudo {
+    max-width: 900px;
+}
+
+.hero-conteudo h1 {
+    font-size: 5rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.hero-conteudo span {
+    color: #f97316;
+}
+
+.hero-conteudo p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.hero-btn {
+    padding: 14px 35px;
+    border: none;
+    border-radius: 10px;
+    background: #f97316;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.hero-btn:hover {
+    background: #c45c0e;
+    transform: translateY(-3px);
+}
+
+/* ===================== MATERIAIS ===================== */
+
+.materias {
+    width: 90%;
+    max-width: 1300px;
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.materias div {
+    background: #0a1840;
+    border: 2px solid #112266;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    transition: .3s;
+}
+
+.materias div:hover {
+    transform: translateY(-8px);
+    border-color: #f97316;
+    box-shadow: 0 12px 30px rgba(249, 115, 22, .2);
+}
+
+.materias h3 {
+    grid-column: 1/-1;
+    text-align: center;
+    font-size: 2.5rem;
+    color: #081535;
+    margin-bottom: 20px;
+}
+
+.materias span {
+    color: #f97316;
+    font-weight: bold;
+}
+
+.materias img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    margin-top: 15px;
+}
+
+/* ===================== TITULOS DAS SEÇÕES ===================== */
+
+.titulo-montagem h3,
+.execução h3 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #081535;
+    margin-bottom: 40px;
+}
+
+.titulo-montagem h3::after,
+.execução h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #f97316;
+    margin: 15px auto;
+    border-radius: 20px;
+}
+
+/* ===================== PASSOS ===================== */
+
+.montagem,
+.execução {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.passso-1,
+.passso-2,
+.passso-3,
+.passso-4,
+.passso-5,
+.passso-6,
+.passo-final,
+.passo-1-execução,
+.passo-2-execução,
+.passo-3-execução,
+.passo-5-execução {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+    transition: .3s;
+}
+
+.passso-1:hover,
+.passso-2:hover,
+.passso-3:hover,
+.passso-4:hover,
+.passso-5:hover,
+.passso-6:hover,
+.passo-final:hover,
+.passo-1-execução:hover,
+.passo-2-execução:hover,
+.passo-3-execução:hover,
+.passo-5-execução:hover {
+    transform: translateY(-5px);
+}
+
+.montagem p:first-child,
+.execução p:first-child {
+    font-weight: bold;
+    color: #f97316;
+    font-size: 1.2rem;
+}
+
+.montagem img,
+.execução img {
+    width: 100%;
+    max-width: 700px;
+    display: block;
+    margin: 25px auto 0;
+    border-radius: 10px;
+}
+
+/* ===================== PASSO FINAL ===================== */
+
+.passo-final {
+    background: #0a1840;
+    color: white;
+    text-align: center;
+    border: 2px solid #112266;
+}
+
+.passo-final span {
+    color: #f97316;
+}
+
+.passo-final h3 {
+    font-size: 2rem;
+}
+
+/* ===================== LINKS ===================== */
+
+.execução a {
+    color: #f97316;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.execução a:hover {
+    text-decoration: underline;
+}
+
+/* ===================== RESPONSIVO ===================== */
+
+@media (max-width: 768px) {
+
+    .hero-conteudo h1 {
+        font-size: 3rem;
+    }
+
+    .hero-conteudo p {
+        font-size: 1rem;
+    }
+
+    .materias {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-montagem h3,
+    .execução h3 {
+        font-size: 2rem;
+    }
+
+    .passso-1,
+    .passso-2,
+    .passso-3,
+    .passso-4,
+    .passso-5,
+    .passso-6,
+    .passo-final,
+    .passo-1-execução,
+    .passo-2-execução,
+    .passo-3-execução,
+    .passo-5-execução {
+        padding: 20px;
+    }
+}
