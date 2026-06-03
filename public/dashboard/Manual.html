@@ -1,35 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual</title>
     <link rel="stylesheet" href="./../css/manual.css">
 </head>
+
 <body>
     <section class="hero-pag" id="Inicio">
         <div class="hero-conteudo container">
             <h1>Manual de <span>Instalação</span></h1>
-             <p>
-            Esse Manual foi criado para o auxilio dos suportes nivel 3
-            para a montagem e execução dos sensores.
-         </p>
+            <p>
+                Esse Manual foi criado para o auxilio dos suportes nivel 3
+                para a montagem e execução dos sensores.
+            </p>
 
-          <p>
-           O botão a seguir contém o mesmo conteudo do site
-           mas em pdf, para melhor vizuaização.
-         </p>
+            <p>
+                O botão a seguir contém o mesmo conteudo do site
+                mas em pdf, para melhor vizuaização.
+            </p>
             <a href="/SolarVision/PDF/Manual de Instalação - Suporte PI.pdf" class="hero-link" download>
                 <button class="hero-btn">Download</button>
             </a>
         </div>
     </section>
 
-<section>
-    <h3>!MATERIAIS UTILIZADOS!</h3>
+    <section class="Inicio" id="materias">
+        <div class="arduino">
+            <h3>!MATERIAIS UTILIZADOS!</h3>
+
+            <p>1° -- <span> 1 Arduíno Uno R3</span></p>
+            <img src="../assets/Manual/arduino.webp" alt="arduino">
+        </div>
+
+        <div class="placa">
+
+            <p> 2° -- <span> 1 Protoboard</span> </p>
+            <img src="../assets/Manual/Protoboard.webp" alt="protoboard">
+        </div>
+
+        <div class="jumpers">
+
+            <p> 3° --
+            <section> 3 Jumpers</section>
+            </p>
+            <img src="../assets/Manual/jumpers.webp" alt="jumpers">
+        </div>
+
+        <div class="sensor">
+
+            <p> 4°-- <span> 1 Sensor LDR de Luminosidade </span></p>
+            <img src="../assets/Manual/sensorldr.webp" alt="LDR">
+
+        </div>
+
+        <div class="resistor">
+
+            <p> 5° -- <span> 1 Resistor</span></p>
+            <img src="../assets/Manual/resistor.webp" alt="Resistor">
+
+        </div>
+
+    </section>
+    <br>
+    <br>
     <br>
 
-</section>
+    <section class="montagem">
+        <div class="titulo-montagem" id="titulo">
+            <h3>MONTAGEM DO ARDUINO </h3>
+        </div>
+        <br>
+
+        <div class="passso-1">
+            <p> Passo 1 :</p>
+            <p>Conecte os jumpers no arduino nos encaixes 5v, GND e A0
+                <br>
+                ( A cor dos fios que serão conectados não importa, apenas preze por serem cores diferentes para saber
+                qual está conectado em qual)
+            </p>
+            <img src="../assets/Manual/passo 1.png" alt="">
+        </div>
+
+        <div class="passso-2">
+            <p> Passo 2 :</p>
+            <p>Conecte o sensor a uma parte da protoboard </p>
+
+            <img src="../assets/Manual/passo1.png" alt="">
+        </div>
+
+        <div class="passso-3">
+            <p> Passo 3 :</p>
+            <p>Conecte o Jumper que está no A0 na perna esquerda do sensor LDR </p>
+
+            <img src="../assets/Manual/passso2.png" alt="">
+        </div>
+
+        <div class="passso-4">
+            <p> Passo 4 :</p>
+            <p>Conecte o resistor nas duas entradas abaixo da perna direita do sensor</p>
+
+            <img src="../assets/Manual/passo3.png" alt="">
+        </div>
+        <br>
+
+        <div class="passso-5">
+            <p> Passo 5 :</p>
+            <p>Conecte o Jumper do GND a perna direita do resistor</p>
+
+            <img src="../assets/Manual/passo4.png" alt="">
+        </div>
+
+        <div class="passso-6">
+            <p> Passo 6 :</p>
+            <p>Conecte o Jumper do 5v à entrada logo acima da perna esquerda do resistor</p>
+
+            <img src="../assets/Manual/passo5.png" alt="">
+        </div>
+
+        <div class="passo-final">
+            <h3>
+                Pronto! <span> <br>
+                    O seu Arduíno Uno R3 está montado com o sensor LDR</span> </h3>
+
+            <img src="../assets/Manual/resultado.png" alt="">
+        </div>
+    </section>
+    <br>
+    <br>
+    <br>
+
+    <section class="execução">
+
+        <h3>!PASSO A PASSO PARA EXECUTAR!</h3>
+
+        <div class="passo-1-execução">
+            <p>PASSO 1 --- <span>Faça o download e instalação do Node.js
+                    <span> <br>
+                        LINK:
+                        <a href="https://nodejs.org/pt-br"> https://nodejs.org/pt-br</a></p>
+            </span>
+            <img src="" alt="">
+        </div>
+        <br>
+        <br>
+
+        <div class="passo-2-execução">
+            <p>PASSO 2 --- <br>
+                <span>acesse o repositório <a href="https://github.com/SoIarVision/SolarVision">SolarVision no
+                        GitHub.</a>
+                    <br>
+                    <img src="../assets/Manual/Captura de tela 2026-06-01 140551.png" alt="execução-2">
+                    Clique em code, e copie o link que aparecer lá!
+                    <span> <br>
+                        LINK DA CLONAGEM:
+                        <a href="https://github.com/SoIarVision/SolarVision.git">
+                            https://github.com/SoIarVision/SolarVision.git</a>
+            </p>
+            </span>
+        </div>
+        <br>
+        <br>
+        <div class="passo-3-execução">
+            <p> PASSO 3 ---
+                <br>
+                Acesse o Terminal do cliente e dê os seguintes comandos <br>
+                Git clone “link copiado do code” <br>
+                <img src="../assets/Manual/Captura de tela 2026-06-01 141423.png" alt="execução-3">
+            </p>
+            <br>
+            <br>
+            <p>Faça as modificações necessárias para o código se adequar ao ambiente do cliente, conferindo se está tudo
+                de acordo e se está tudo em funcionamento.
+                <br>
+            </p>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="passo-5-execução">
+            <p>PASSO 4 ---
+                <br>
+                Dentro do Terminal do cliente dê “npm I" para instalar a atualização da api, se certificando que esta
+                tudo instalado siga para o proximo passo.
+                <br>
+                <img src="../assets/Manual/Captura de tela 2026-06-02 145657.png" alt="npmI">
+            </p>
+        </div>
+<br>
+<br>
+<br>
+        <div class="passo-5-execução">
+
+            <p>PASSO 5 ---
+                <br>
+                Após a instalação da API, no mesmo terminal escreva “npm start” e aparecer isso, significa que o servidor
+                estar rodando certo sem nenhuma interrupção.
+<br>
+<br>
+<br>
+ <img src="../assets/Manual/Captura de tela 2026-06-01 135425.png" alt="npmstart">
+
+
+            </p>
+
+
+        </div>
+
+
+
+    </section>
 
 </body>
+
 </html>
