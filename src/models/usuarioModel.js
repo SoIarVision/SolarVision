@@ -5,8 +5,8 @@ function autenticar(email, senha) {
     var instrucaoSql = `
     SELECT 
 	    u.idUsuario id, 
-        u.nome,
-        u.email, 
+        u.nome nome,
+        u.email email, 
         e.nome as empresa,
         c.cargo cargo
     FROM usuario u
