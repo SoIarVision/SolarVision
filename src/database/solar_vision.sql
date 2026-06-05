@@ -178,3 +178,25 @@ SELECT
 FROM usuario u
 LEFT JOIN empresa e ON u.fkEmpresa = e.idEmpresa
 LEFT JOIN cargo c ON u.fkCargo = c.idCargo;
+
+SELECT 
+	e.idEmpresa,
+    e.nome,
+    COUNT(Distinct p.idPlaca) Placas,
+    COUNT(Distinct u.idUsuario) Funcionarios
+from empresa e
+JOIN placa p ON p.fkEmpresa = e.idEmpresa
+JOIN usuario u ON u.fkEmpresa = e.idEmpresa
+group by e.nome, e.idEmpresa;
+
+SELECT 
+	u.idUsuario id,
+	u.nome Nome,
+    u.contato Telefone,
+    c.cargo Cargo,
+    e.idEmpresa idEmpresa,
+    e.nome Empresa
+FROM usuario u
+JOIN cargo c ON c.idCargo = u.fkCargo
+JOIN empresa e ON e.idEmpresa = u.fkEmpresa
+where idEmpresa = 1;

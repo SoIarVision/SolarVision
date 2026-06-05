@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresas - SolarVision</title>
+    <script src="../js/sessao.js"> </script>
+
+    <link rel="stylesheet" href="./CSS/style_empresa.css">
+</head>
+
+<body>
+    <nav class="navbar" id="id_navbar">
+        <div class="container nav-conteudo">
+            <div class="nav-logo">Solar<span>Vision</span></div>
+
+            <div class="nav-links">
+                <a href="../Simulador.html">Simulador Financeiro</a>
+            </div>
+        </div>
+    </nav>
+
+    <aside class="sidebar" id="id_sidebar">
+        <div class="sidebar-topo">
+            <div class="nav-logo sidebar-logo">Solar<span>Vision</span></div>
+            <button class="btn-menu-toggle" id="id_fechar">☰</button>
+        </div>
+
+        <ul class="menu">
+            <li class="menu-item"><a href="charjs.html">📊 <span class="link-text">Dashboard</span></a></li>
+            <li class="menu-item"><a href="empresa.html">🏤 <span class="link-text">Empresa</span></a></li>
+            <li class="menu-item"><a href="#">⚙️ <span class="link-text">Configurações</span></a></li>
+            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span
+                        class="link-text">BobIA</span></a></li>
+            <li class="menu-item"><a
+                    href="https://sptech-team-tow3180n.atlassian.net/jira/core/projects/SV/board?filter=&groupBy=none&atlOrigin=eyJpIjoiZTBkNjgxNjkwZTZmNGI4Y2FhODhmNjZiMTRhMWFlOWIiLCJwIjoiaiJ9"
+                    target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
+            <li class="menu-item"><a href="Manual.html">📖 <span class="link-text">Manual de Instalação</span></a></li>
+        </ul>
+
+        <div class="sidebar-bottom">
+            <button class="btn-sair" id="btn_sair">🚪 <span class="link-text">Logout</span></button>
+        </div>
+    </aside>
+
+    <div class="conteudo_principal" id="id_conteudo_principal">
+        <div class="container">
+            <h1 class="titulo_pagina">Empresas e Funcionários</h1>
+
+            <section class="secao_empresas">
+                <h2 class="titulo_secao">Empresas Cadastradas</h2>
+                <div class="lista_empresas">
+                    <div class="card_empresa">
+                        <div class="empresa_header">
+                            <h3 class="nome_empresa">${empresa.nome}</h3>
+                        </div>
+
+                        <div class="empresa_info_grid">
+                            <div class="empresa_info_item">
+                                <span class="info_label">Representante</span>
+                                <span class="info_valor">${empresa.representante}</span>
+                            </div>
+
+                            <div class="empresa_info_item">
+                                <span class="info_label">Local</span>
+                                <span class="info_valor">${empresa.local}</span>
+                            </div>
+
+                            <div class="empresa_info_item">
+                                <span class="info_label">Quantidade de Placas</span>
+                                <span class="info_valor info_destaque">${empresa.qtdPlacas}</span>
+                            </div>
+
+                            <div class="empresa_info_item">
+                                <span class="info_label">Quantidade de Funcionários</span>
+                                <span class="info_valor info_destaque">${empresa.qtdFuncionarios}</span>
+                            </div>
+
+                            <div class="empresa_info_item">
+                                <span class="info_label">Contato</span>
+                                <span class="info_valor">${empresa.contato}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="secao_funcionarios">
+                <h2 class="titulo_secao">Funcionários</h2>
+                <div class="grid_funcionarios">
+                    <div class="card_funcionario">
+                        <h3 class="nome_funcionario">${funcionario.nome}</h3>
+
+                        <div class="funcionario_info">
+                            <div class="funcionario_campo">
+                                <span class="funcionario_label">Cargo</span>
+                                <span class="funcionario_valor">${funcionario.cargo}</span>
+                            </div>
+
+                            <div class="funcionario_campo">
+                                <span class="funcionario_label">Contato</span>
+                                <span class="funcionario_valor">${funcionario.contato}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </section>
+    </div>
+    </div>
+</body>
+<script>
+
+
+    document.getElementById("id_fechar").addEventListener("click", function () {
+
+        document.getElementById("id_sidebar").classList.toggle("fechar");
+        document.getElementById("id_conteudo_principal").classList.toggle("fechar");
+        document.getElementById("id_navbar").classList.toggle("fechar");
+
+
+
+        if (document.getElementById("id_navbar").classList.contains("fechar")) {
+            document.getElementById("logo_navbar").style.display = "block";
+        } else {
+            document.getElementById("logo_navbar").style.display = "none";
+        }
+    });
+</script>
+
+</html>
