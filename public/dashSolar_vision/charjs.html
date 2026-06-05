@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src = "../js/sessao.js"> </script>
     <link rel="stylesheet" href="./CSS/style_dash.css">
 </head>
 
-<body>
+<body onload=" ajustarNavbarSessao(); validarSessao();">
     <nav class="navbar" id="id_navbar">
         <div class="container nav-conteudo">
 
-            <div class="nav-logo">Solar<span>Vision</span></div>
+            <div class="nav-logo" id = "logo_navbar">Solar<span>Vision</span></div>
 
             <div class="nav-links">
                 <a href="../Simulador.html">Simulador Financeiro</a>
@@ -37,7 +38,7 @@
         </ul>
 
         <div class="sidebar-bottom">
-            <button class="btn-sair" id="btn_sair">🚪 <span class="link-text">Logout</span></button>
+            <button class="btn-sair" id="btn_sair" onclick="limparSessao()">🚪 <span class="link-text">Logout</span></button>
         </div>
 
     </aside>

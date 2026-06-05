@@ -12,6 +12,25 @@ function validarSessao() {
     }
 }
 
+function ajustarNavbarSessao() {
+    /*var idUsuario = sessionStorage.ID_USUARIO;
+    var tipoUsuario = sessionStorage.TIPO
+*/
+
+    let idUsuario = undefined
+    if (idUsuario == undefined) {
+        logo_navbar.style.display = "none";
+        
+    } else {
+        logo_navbar.style.display = "none";
+
+/*        if(tipoUsuario == 'admin'){
+            link_dashboard.style.display = "block";
+        }*/
+        
+    }
+}
+
 function limparSessao() {
     sessionStorage.clear();
     window.location = "../login.html";
