@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./CSS/style_empresa.css">
 </head>
 
-<body>
+<body onload=" ajustarNavbarSessao(); validarSessao();">
     <nav class="navbar" id="id_navbar">
         <div class="container nav-conteudo">
             <div class="nav-logo">Solar<span>Vision</span></div>
@@ -31,79 +31,30 @@
             <li class="menu-item"><a href="charjs.html">📊 <span class="link-text">Dashboard</span></a></li>
             <li class="menu-item"><a href="empresa.html">🏤 <span class="link-text">Empresa</span></a></li>
             <li class="menu-item"><a href="#">⚙️ <span class="link-text">Configurações</span></a></li>
-            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span
-                        class="link-text">BobIA</span></a></li>
-            <li class="menu-item"><a
-                    href="https://sptech-team-tow3180n.atlassian.net/jira/core/projects/SV/board?filter=&groupBy=none&atlOrigin=eyJpIjoiZTBkNjgxNjkwZTZmNGI4Y2FhODhmNjZiMTRhMWFlOWIiLCJwIjoiaiJ9"
-                    target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
+            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span class="link-text">BobIA</span></a></li>
+            <li class="menu-item"><a href="https://sptech-team-tow3180n.atlassian.net/jira/core/projects/SV/board?filter=&groupBy=none&atlOrigin=eyJpIjoiZTBkNjgxNjkwZTZmNGI4Y2FhODhmNjZiMTRhMWFlOWIiLCJwIjoiaiJ9" target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
             <li class="menu-item"><a href="Manual.html">📖 <span class="link-text">Manual de Instalação</span></a></li>
         </ul>
 
         <div class="sidebar-bottom">
-            <button class="btn-sair" id="btn_sair">🚪 <span class="link-text">Logout</span></button>
+            <button class="btn-sair" id="btn_sair" onclick="limparSessao()">🚪 <span class="link-text">Logout</span></button>
         </div>
     </aside>
 
     <div class="conteudo_principal" id="id_conteudo_principal">
         <div class="container">
-            <h1 class="titulo_pagina">Empresas e Funcionários</h1>
+            <h1 class="titulo_pagina" id="titulo_empresas">Empresas</h1>
+            <h1 class="titulo_pagina" id="titulo_funcionarios">Funcionários</h1>
 
             <section class="secao_empresas">
                 <h2 class="titulo_secao">Empresas Cadastradas</h2>
-                <div class="lista_empresas">
-                    <div class="card_empresa">
-                        <div class="empresa_header">
-                            <h3 class="nome_empresa">${empresa.nome}</h3>
-                        </div>
-
-                        <div class="empresa_info_grid">
-                            <div class="empresa_info_item">
-                                <span class="info_label">Representante</span>
-                                <span class="info_valor">${empresa.representante}</span>
-                            </div>
-
-                            <div class="empresa_info_item">
-                                <span class="info_label">Local</span>
-                                <span class="info_valor">${empresa.local}</span>
-                            </div>
-
-                            <div class="empresa_info_item">
-                                <span class="info_label">Quantidade de Placas</span>
-                                <span class="info_valor info_destaque">${empresa.qtdPlacas}</span>
-                            </div>
-
-                            <div class="empresa_info_item">
-                                <span class="info_label">Quantidade de Funcionários</span>
-                                <span class="info_valor info_destaque">${empresa.qtdFuncionarios}</span>
-                            </div>
-
-                            <div class="empresa_info_item">
-                                <span class="info_label">Contato</span>
-                                <span class="info_valor">${empresa.contato}</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="lista_empresas" id="lista_empresas">
                 </div>
             </section>
 
             <section class="secao_funcionarios">
                 <h2 class="titulo_secao">Funcionários</h2>
-                <div class="grid_funcionarios">
-                    <div class="card_funcionario">
-                        <h3 class="nome_funcionario">${funcionario.nome}</h3>
-
-                        <div class="funcionario_info">
-                            <div class="funcionario_campo">
-                                <span class="funcionario_label">Cargo</span>
-                                <span class="funcionario_valor">${funcionario.cargo}</span>
-                            </div>
-
-                            <div class="funcionario_campo">
-                                <span class="funcionario_label">Contato</span>
-                                <span class="funcionario_valor">${funcionario.contato}</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="grid_funcionarios" id="grid_funcionarios">
                 </div>
         </div>
         </section>
@@ -111,7 +62,92 @@
     </div>
 </body>
 <script>
+    const idEmpresa = sessionStorage.ID_EMPRESA;
+    const cargo = sessionStorage.CARGO_USUARIO;
 
+    const secaoEmpresas = document.querySelector(".secao_empresas");
+    const secaoFuncionarios = document.querySelector(".secao_funcionarios");
+    const titulo_func = document.getElementById("titulo_funcionarios")
+    const titulo_empresa = document.getElementById("titulo_empresas")
+
+    if (cargo.trim() === "Administrador") {
+        titulo_func.style.display = "none"
+        secaoFuncionarios.style.display = "none";
+        fetch("/dashboard/empresas/listar")
+            .then((resposta) => resposta.json())
+            .then((empresas) => {
+                var container = document.getElementById("lista_empresas")
+                container.innerHTML = "";
+                empresas.forEach((empresa) => {
+                    container.innerHTML += `
+                    <div class="card_empresa">
+                        <div class="empresa_header">
+                            <h3 class="nome_empresa">${empresa.Nome}</h3>
+                        </div>
+                        
+                        <div class="empresa_info_grid">
+                            <div class="empresa_info_item">
+                                <span class="info_label">Representante</span>
+                                <span class="info_valor">${empresa.Representante}</span>
+                            </div>
+    
+                            <div class="empresa_info_item">
+                                <span class="info_label">Local</span>
+                                <span class="info_valor">${empresa.localidade}</span>
+                            </div>
+    
+                            <div class="empresa_info_item">
+                                <span class="info_label">Quantidade de Placas</span>
+                                <span class="info_valor info_destaque">${empresa.Placas}</span>
+                            </div>
+    
+                            <div class="empresa_info_item">
+                                <span class="info_label">Quantidade de Funcionários</span>
+                                <span class="info_valor info_destaque">${empresa.Funcionarios}</span>
+                            </div>
+    
+                            <div class="empresa_info_item">
+                                <span class="info_label">Contato</span>
+                                <span class="info_valor">${empresa.Contato}</span>
+                            </div>
+                        </div>
+                    </div>`
+                })
+            });
+    }
+    else if (cargo.trim() === "Gerente") {
+        titulo_empresa.style.display = "none"
+        secaoEmpresas.style.display = "none";
+
+        fetch(`/dashboard/funcionarios/listar/${idEmpresa}`)
+            .then((resposta) => resposta.json())
+            .then((funcionario) => {
+                var container = document.getElementById("grid_funcionarios")
+                container.innerHTML = "";
+                funcionario.forEach((funcionario) => {
+                    container.innerHTML += `
+                        <div class="card_funcionario">
+                        <h3 class="nome_funcionario">${funcionario.Nome}</h3>
+    
+                        <div class="funcionario_info">
+                            <div class="funcionario_campo">
+                                <span class="funcionario_label">Cargo</span>
+                                <span class="funcionario_valor">${funcionario.Cargo}</span>
+                            </div>
+    
+                            <div class="funcionario_campo">
+                                <span class="funcionario_label">Contato</span>
+                                <span class="funcionario_valor">${funcionario.Telefone}</span>
+                            </div>
+                        </div>
+                    </div>`
+                })
+            });
+    }
+
+    else {
+        window.location = 'charjs.html'
+    }
 
     document.getElementById("id_fechar").addEventListener("click", function () {
 

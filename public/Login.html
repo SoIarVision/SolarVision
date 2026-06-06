@@ -145,25 +145,46 @@
             if (!erros) {
                 fetch('/usuarios/autenticar', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ emailServer: email, senhaServer: senha })
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        emailServer: email,
+                        senhaServer: senha
+                    })
                 })
                     .then(function (resposta) {
-                        if (resposta.ok) {
-                            resposta.json().then(function (dados) {
-                                sessionStorage.EMAIL_USUARIO = dados.email;
-                                sessionStorage.NOME_USUARIO = dados.nome;
-                                sessionStorage.ID_USUARIO = dados.id;
-                                sessionStorage.CARGO_USUARIO = dados.cargo;
-                                mostrarCerto('Login realizado! Redirecionando...');
-                                setTimeout(() => window.location = './dashSolar_vision/charjs.html', 1500);
-                            });
-                        } else {
-                            mostrarErro('Email ou senha inválidos!');
+
+                        if (!resposta.ok) {
+                            throw new Error('Email ou senha inválidos!');
                         }
+
+                        return resposta.json();
+
                     })
-                    .catch(function () {
-                        mostrarErro('Erro de conexão. Tente novamente.');
+                    .then(function (dados) {
+
+                        console.log("Dados recebidos:", dados);
+                        console.log("Empresa recebida:", dados.empresa);
+
+                        sessionStorage.EMAIL_USUARIO = dados.email;
+                        sessionStorage.NOME_USUARIO = dados.nome;
+                        sessionStorage.ID_USUARIO = dados.id;
+                        sessionStorage.CARGO_USUARIO = dados.cargo;
+                        sessionStorage.ID_EMPRESA = dados.empresa;
+
+                        console.log("Session empresa:", sessionStorage.ID_EMPRESA);
+
+                        mostrarCerto('Login realizado! Redirecionando...');
+
+                        setTimeout(() => {
+                            window.location = './dashSolar_vision/charjs.html';
+                        }, 1500);
+
+                    })
+                    .catch(function (erro) {
+                        console.error(erro);
+                        mostrarErro(erro.message || 'Erro de conexão. Tente novamente.');
                     });
             }
         }

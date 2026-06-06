@@ -76,13 +76,33 @@ INSERT INTO cargo (cargo) VALUES
 ('Funcionário');
 
 INSERT INTO usuario (nome, cpf, contato, email, senha, fkCargo, fkEmpresa) VALUES
-('Leonardo Pires', '67044302901', '11989456032', 'leonardoresp@gmail.com', 'leopiresmk', 3, 1),
-('Manoela Albuquerque', '23400192454', '11988887777', 'manoelaalb@gmail.com', 'manoelaalbufd', 2, 2),
+('Leonardo Pires', '67044302901', '11989456032', 'leonardoresp@gmail.com', 'Leopiresmk1@', 3, 1),
+('Manoela Albuquerque', '23400192454', '11988887777', 'manoelaalb@gmail.com', 'manoelaalbufd', 3, 2),
+('Vinicius Borges', '12345678911', '11988887777', 'vinicius.bnascimento@gmail.com', 'manoelaalbufd', 3, 3),
+('Pedro', '88888888888','','pedro@gmail.com','Pedro12#',2,null),
 ('Lucas', '77777777777','','lucass3neogalvao@gmail.com','Lucas12#',1,null);
 
 INSERT INTO placa (fkEmpresa, localizacao, descricao) VALUES
 (1, 'Setor Norte', 'Placa principal da BYD'),
-(2, 'Setor Sul', 'Placa secundária da Samsung');
+(1, 'Setor Norte', 'Placa principal da BYD'),
+(1, 'Setor Norte', 'Placa principal da BYD'),
+(1, 'Setor Norte', 'Placa principal da BYD'),
+(1, 'Setor Norte', 'Placa principal da BYD'),
+(2, 'Setor Sul', 'Placa secundária da Samsung'),
+(2, 'Setor Sul', 'Placa secundária da Samsung'),
+(2, 'Setor Sul', 'Placa secundária da Samsung'),
+(2, 'Setor Sul', 'Placa secundária da Samsung'),
+(2, 'Setor Sul', 'Placa secundária da Samsung'),
+(2, 'Setor Sul', 'Placa secundária da Samsung'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva'),
+(3, 'Setor Sul', 'Placa primário da Janaúva');
 
 INSERT INTO grupo_sensor (localizacao, tipo, status_sensor, valor_leitura, fkPlaca) VALUES
 ('Painel A1', 'Controle', 'Ativo', '750', 1),
@@ -98,7 +118,7 @@ INSERT INTO historico_eficiencia (valor_eficiencia, fkPlaca) VALUES
 (92.4, 1),
 (87.5, 2);
 
-CREATE VIEW view_detalhamento_sensor AS
+CREATE VIEW vw_detalhamento_sensor AS
 SELECT
     p.idPlaca AS 'Placa Solar',
     p.descricao AS 'Descrição',
@@ -119,7 +139,7 @@ ON ef.fkPlaca = p.idPlaca
 JOIN grupo_sensor g
 ON g.fkPlaca = p.idPlaca;
 
-CREATE VIEW view_registro_ref_empresa AS
+CREATE VIEW vw_registro_ref_empresa AS
 SELECT
     e.nome AS 'Empresa',
     u.nome AS 'Funcionário Responsável',
@@ -137,7 +157,7 @@ ON g.fkPlaca = p.idPlaca
 JOIN registro r
 ON r.fkSensor = g.idSensor;
 
-CREATE VIEW view_funcionario AS
+CREATE VIEW vw_funcionario AS
 SELECT
     e.nome AS 'Empresa',
     u.nome AS 'Funcionário',
@@ -149,7 +169,7 @@ ON u.fkEmpresa = e.idEmpresa
 JOIN cargo c
 ON c.idCargo = u.fkCargo;
 
-CREATE VIEW view_registro AS
+CREATE VIEW vw_registro AS
 SELECT
     r.valor,
     r.data_registro,
@@ -164,32 +184,7 @@ ON g.fkPlaca = p.idPlaca
 JOIN empresa e
 ON p.fkEmpresa = e.idEmpresa;
 
-select * from view_detalhamento_sensor;
-select * from view_registro_ref_empresa;
-select * from view_funcionario;
-select * from view_registro;
-
-SELECT 
-	u.idUsuario id, 
-    u.nome,
-    u.email, 
-    e.nome as empresa,
-    c.cargo cargo
-FROM usuario u
-LEFT JOIN empresa e ON u.fkEmpresa = e.idEmpresa
-LEFT JOIN cargo c ON u.fkCargo = c.idCargo;
-
-SELECT 
-	e.idEmpresa,
-    e.nome,
-    COUNT(Distinct p.idPlaca) Placas,
-    COUNT(Distinct u.idUsuario) Funcionarios
-from empresa e
-JOIN placa p ON p.fkEmpresa = e.idEmpresa
-JOIN usuario u ON u.fkEmpresa = e.idEmpresa
-group by e.nome, e.idEmpresa;
-
-SELECT 
+/* SELECT 
 	u.idUsuario id,
 	u.nome Nome,
     u.contato Telefone,
@@ -199,4 +194,33 @@ SELECT
 FROM usuario u
 JOIN cargo c ON c.idCargo = u.fkCargo
 JOIN empresa e ON e.idEmpresa = u.fkEmpresa
-where idEmpresa = 1;
+where idEmpresa = ?;
+*/
+
+
+CREATE VIEW vw_listar_empresas AS
+SELECT 
+	e.idEmpresa id,
+    e.nome Nome,
+    e.endereco localidade,
+	(SELECT u2.nome FROM usuario u2 
+    JOIN cargo c2 ON u2.fkCargo = c2.idCargo 
+    WHERE u2.fkEmpresa = e.idEmpresa AND c2.cargo = 'Gerente' LIMIT 1) Representante,
+	(SELECT u.email FROM usuario u
+    JOIN cargo c ON u.fkCargo = c.idCargo
+    where u.fkEmpresa = e.idEmpresa and c.cargo = 'Gerente' LIMIT 1) Contato,
+    COUNT(Distinct p.idPlaca) Placas,
+    COUNT(Distinct u.idUsuario) Funcionarios
+from empresa e
+LEFT JOIN placa p ON p.fkEmpresa = e.idEmpresa
+LEFT JOIN usuario u ON u.fkEmpresa = e.idEmpresa
+group by e.idEmpresa, e.nome, e.endereco
+order by e.idEmpresa;
+
+select * from vw_listar_empresas;
+select * from vw_detalhamento_sensor;
+select * from vw_registro_ref_empresa;
+select * from vw_funcionario;
+select * from vw_registro;
+
+

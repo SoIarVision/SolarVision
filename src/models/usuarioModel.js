@@ -7,7 +7,7 @@ function autenticar(email, senha) {
 	    u.idUsuario id, 
         u.nome nome,
         u.email email, 
-        e.nome as empresa,
+        u.fkEmpresa empresa,
         c.cargo cargo
     FROM usuario u
     LEFT JOIN empresa e ON u.fkEmpresa = e.idEmpresa
@@ -24,7 +24,7 @@ function cadastrar(nome, email, senha) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, senha) VALUES ('${nome}', '${email}', '${senha}');
+        INSERT INTO usuario (nome, email, senha, fkCargo) VALUES ('${nome}', '${email}', '${senha}', '4');
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
