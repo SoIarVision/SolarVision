@@ -1,32 +1,28 @@
 var database = require("../database/config")
 
-function listarTodasEmpresas() {
+function mostrarEficiencia(idEmpresa) {
     var InstrucaoSQL = `
-    SELECT * from vw_listar_empresas;`
-
-    console.log("Executando a instrução SQL: \n" + InstrucaoSQL);
-    return database.executar(InstrucaoSQL)
-}
-
-function listarFuncionarios(idEmpresa) {
-    var InstrucaoSQL = `
-    SELECT 
-        u.idUsuario id,
-        u.nome Nome,
-        u.contato Telefone,
-        c.cargo Cargo,
-        e.idEmpresa idEmpresa,
-        e.nome Empresa
-    FROM usuario u
-    JOIN cargo c ON c.idCargo = u.fkCargo
-    JOIN empresa e ON e.idEmpresa = u.fkEmpresa
-    where idEmpresa = ?;`
+    SELECT
+        r.idRegistro,
+        r.valor,
+        r.data_registro,
+        gs.tipo,
+        gs.localizacao,
+        e.idEmpresa,
+        e.nome AS empresa
+    FROM registro r
+    JOIN grupo_sensor gs ON gs.idSensor = r.fkSensor
+    JOIN placa p ON p.idPlaca = gs.fkPlaca
+    JOIN empresa e ON e.idEmpresa = p.fkEmpresa
+    WHERE e.idEmpresa = 1
+    ORDER BY r.idRegistro DESC
+    LIMIT 6;`
 
     console.log("Executando a instrução SQL: \n" + InstrucaoSQL);
     return database.executar(InstrucaoSQL, [idEmpresa])
 }
 
+
 module.exports = {
-    listarTodasEmpresas,
-    listarFuncionarios,
+    mostrarEficiencia
 }

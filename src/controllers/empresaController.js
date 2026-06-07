@@ -1,47 +1,36 @@
 var empresaModel = require("../models/empresaModel");
 
-function buscarPorCnpj(req, res) {
-  var cnpj = req.query.cnpj;
-
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    res.status(200).json(resultado);
-  });
+function listarTodasEmpresas(req, res) {
+  empresaModel.listarTodasEmpresas()
+    .then((resultado) => {
+      if (resultado.length === 0) {
+        return res.status(404).json({ mensagem: "Empresa não encontrada." });
+      }
+      res.json(resultado);
+    })
+    .catch((erro) => {
+      console.error("Erro ao buscar info da Empresa:", erro);
+      res.status(500).json({ erro: erro.sqlMessage });
+    });
 }
 
-function listar(req, res) {
-  empresaModel.listar().then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
+function listarFuncionarios(req, res) {
+  var idEmpresa = req.params.idEmpresa
 
-function buscarPorId(req, res) {
-  var id = req.params.id;
-
-  empresaModel.buscarPorId(id).then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
-function cadastrar(req, res) {
-  var cnpj = req.body.cnpj;
-  var razaoSocial = req.body.razaoSocial;
-
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    if (resultado.length > 0) {
-      res
-        .status(401)
-        .json({ mensagem: `a empresa com o cnpj ${cnpj} já existe` });
-    } else {
-      empresaModel.cadastrar(razaoSocial, cnpj).then((resultado) => {
-        res.status(201).json(resultado);
-      });
-    }
-  });
+  empresaModel.listarFuncionarios(idEmpresa)
+    .then((resultado) => {
+      if (resultado.length === 0) {
+        return res.status(404).json({ mensagem: "Funcionários não encontrados." });
+      }
+      res.json(resultado);
+    })
+    .catch((erro) => {
+      console.error("Erro ao buscar info dos Funcionários:", erro);
+      res.status(500).json({ erro: erro.sqlMessage });
+    });
 }
 
 module.exports = {
-  buscarPorCnpj,
-  buscarPorId,
-  cadastrar,
-  listar,
-};
+  listarTodasEmpresas,
+  listarFuncionarios,
+}

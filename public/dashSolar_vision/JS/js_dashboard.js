@@ -203,18 +203,78 @@ setInterval(() => {
 
 // Sidebar
 
-document.getElementById("id_fechar").addEventListener("click", function() {
+document.getElementById("id_fechar").addEventListener("click", function () {
 
     document.getElementById("id_sidebar").classList.toggle("fechar");
     document.getElementById("id_conteudo_principal").classList.toggle("fechar");
     document.getElementById("id_navbar").classList.toggle("fechar");
 
-    
 
-    if(document.getElementById("id_navbar").classList.contains("fechar")){
+
+    if (document.getElementById("id_navbar").classList.contains("fechar")) {
         document.getElementById("logo_navbar").style.display = "block";
-    }else{
-         document.getElementById("logo_navbar").style.display = "none";
+    } else {
+        document.getElementById("logo_navbar").style.display = "none";
     }
 });
 
+const idEmpresa = sessionStorage.ID_EMPRESA;
+function atualizar_eficiencia() {
+    
+fetch(`/dashboard/eficiencia/${idEmpresa}`)
+    .then((resultado) => resultado.json())
+    .then((valores) => {
+        var cards = document.getElementById("cards")
+        var controle = 0
+        var ideal = 0
+
+        for (let i = 0; i < valores.length; i++) {
+            if (valores[i].tipo == 'Controle') {
+                controle += Number(valores[i].valor)
+            } else {
+                ideal += Number(valores[i].valor)
+            }
+        }
+
+        var eficiencia = ((controle / ideal) * 100).toFixed(1)
+        const data = new Date(valores[0].data_registro);
+
+        const dataFormatada = data.toLocaleString('pt-BR');
+        var status = "";
+
+        if (eficiencia >= 95) {
+            status = "Operação normal";
+        }
+        else if (eficiencia >= 85) {
+            status = "Monitoramento recomendado";
+        }
+        else if (eficiencia >= 70) {
+            status = "Limpeza recomendada";
+        }
+        else if (eficiencia >= 50) {
+            status = "Limpeza necessária";
+        }
+        else {
+            status = "Verificação urgente";
+        }
+
+        cards.innerHTML = `
+            <div class="card">
+                <h3>Eficiência atual</h3>
+                <p>${eficiencia}%</p>
+                <h5>Última leitura: <br>${dataFormatada}</h5>
+            </div>
+            <div class="card">
+                <h3> Status </h3>
+                <p>${status}</p>
+            </div>
+            <div class="card">
+                <h3> Ultima limpeza </h3>
+                <p> 13/05/2026 </p>
+            </div>`
+    });
+
+    setTimeout(() => {
+        atualizar_eficiencia()}, 3000);
+}
+atualizar_eficiencia()

@@ -223,4 +223,53 @@ select * from vw_registro_ref_empresa;
 select * from vw_funcionario;
 select * from vw_registro;
 
+select * from grupo_sensor;
+select * from registro;
 
+SELECT 
+	r.idRegistro,
+	r.valor valor,
+    r.data_registro dtRegistro,
+    g.tipo tipo,
+    g.valor_leitura leitura
+FROM registro r
+LEFT JOIN grupo_sensor g ON r.fkSensor = g.idSensor 
+order by r.idRegistro DESC LIMIT 42;
+
+select * from registro
+order by idRegistro desc
+LIMIT 6;
+
+select * from grupo_sensor;
+-- select * from limpeza order by idLimpeza desc limit 1;
+
+-- INSERT INTO limpeza (dtLimpeza) VALUE (now())
+
+/*
+SELECT
+    r.idRegistro,
+    r.valor,
+    r.data_registro,
+    gs.tipo,
+    gs.localizacao,
+    e.idEmpresa,
+    e.nome AS empresa
+FROM registro r
+JOIN grupo_sensor gs ON gs.idSensor = r.fkSensor
+JOIN placa p ON p.idPlaca = gs.fkPlaca
+JOIN empresa e ON e.idEmpresa = p.fkEmpresa
+WHERE e.idEmpresa = ?
+ORDER BY r.idRegistro DESC
+LIMIT 6;
+*/
+
+INSERT INTO registro (valor, data_registro, fkSensor) VALUES
+(500, '2026-06-07 08:35:00', 2),
+(520, '2026-06-07 08:35:00', 2),
+(480, '2026-06-07 08:35:00', 2),
+
+(480, '2026-06-07 08:35:00', 1),
+(470, '2026-06-07 08:35:00', 1),
+(490, '2026-06-07 08:35:00', 1);
+
+delete from registro where idRegistro > 45;

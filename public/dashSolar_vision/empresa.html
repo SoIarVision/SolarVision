@@ -29,15 +29,20 @@
 
         <ul class="menu">
             <li class="menu-item"><a href="charjs.html">📊 <span class="link-text">Dashboard</span></a></li>
-            <li class="menu-item"><a href="empresa.html">🏤 <span class="link-text">Empresa</span></a></li>
+            <li class="menu-item"><a href="#">🏤 <span class="link-text">Empresa</span></a></li>
+            <li class="menu-item"><a
+                    href="https://sptech-team-tow3180n.atlassian.net/jira/core/form/cc4b1d0c-c490-4e68-a64e-a39c45acf177?atlOrigin=eyJpIjoiZjc2Mzc0OWEzOTk0NDI3OTk1YWI3MDdmYzk0NDlhNzUiLCJwIjoiaiJ9"
+                    target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
             <li class="menu-item"><a href="#">⚙️ <span class="link-text">Configurações</span></a></li>
-            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span class="link-text">BobIA</span></a></li>
-            <li class="menu-item"><a href="https://sptech-team-tow3180n.atlassian.net/jira/core/projects/SV/board?filter=&groupBy=none&atlOrigin=eyJpIjoiZTBkNjgxNjkwZTZmNGI4Y2FhODhmNjZiMTRhMWFlOWIiLCJwIjoiaiJ9" target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
-            <li class="menu-item"><a href="Manual.html">📖 <span class="link-text">Manual de Instalação</span></a></li>
+            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span
+                        class="link-text">BobIA</span></a></li>
+            <li class="menu-item"><a href="./Manual.html">📖 <span class="link-text">Manual de Instalação</span></a>
+            </li>
         </ul>
 
         <div class="sidebar-bottom">
-            <button class="btn-sair" id="btn_sair" onclick="limparSessao()">🚪 <span class="link-text">Logout</span></button>
+            <button class="btn-sair" id="btn_sair" onclick="limparSessao()">🚪 <span
+                    class="link-text">Logout</span></button>
         </div>
     </aside>
 
@@ -73,7 +78,7 @@
     if (cargo.trim() === "Administrador") {
         titulo_func.style.display = "none"
         secaoFuncionarios.style.display = "none";
-        fetch("/dashboard/empresas/listar")
+        fetch("/empresas/listar/empresas")
             .then((resposta) => resposta.json())
             .then((empresas) => {
                 var container = document.getElementById("lista_empresas")
@@ -119,7 +124,7 @@
         titulo_empresa.style.display = "none"
         secaoEmpresas.style.display = "none";
 
-        fetch(`/dashboard/funcionarios/listar/${idEmpresa}`)
+        fetch(`/empresas/funcionarios/listar/${idEmpresa}`)
             .then((resposta) => resposta.json())
             .then((funcionario) => {
                 var container = document.getElementById("grid_funcionarios")

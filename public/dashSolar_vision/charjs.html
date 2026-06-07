@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src = "../js/sessao.js"> </script>
+    <script src="../js/sessao.js"> </script>
     <link rel="stylesheet" href="./CSS/style_dash.css">
 </head>
 
@@ -14,7 +14,7 @@
     <nav class="navbar" id="id_navbar">
         <div class="container nav-conteudo">
 
-            <div class="nav-logo" id = "logo_navbar">Solar<span>Vision</span></div>
+            <div class="nav-logo" id="logo_navbar">Solar<span>Vision</span></div>
 
             <div class="nav-links">
                 <a href="../Simulador.html">Simulador Financeiro</a>
@@ -31,15 +31,19 @@
         <ul class="menu">
             <li class="menu-item"><a href="#">📊 <span class="link-text">Dashboard</span></a></li>
             <li class="menu-item"><a href="empresa.html">🏤 <span class="link-text">Empresa</span></a></li>
+            <li class="menu-item"><a
+                    href="https://sptech-team-tow3180n.atlassian.net/jira/core/form/cc4b1d0c-c490-4e68-a64e-a39c45acf177?atlOrigin=eyJpIjoiZjc2Mzc0OWEzOTk0NDI3OTk1YWI3MDdmYzk0NDlhNzUiLCJwIjoiaiJ9"
+                    target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
             <li class="menu-item"><a href="#">⚙️ <span class="link-text">Configurações</span></a></li>
-            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span class="link-text">BobIA</span></a></li>
-            <li class="menu-item"><a href="https://sptech-team-tow3180n.atlassian.net/jira/core/projects/SV/board?filter=&groupBy=none&atlOrigin=eyJpIjoiZTBkNjgxNjkwZTZmNGI4Y2FhODhmNjZiMTRhMWFlOWIiLCJwIjoiaiJ9" target="_blank">🆘 <span class="link-text">Suporte</span></a></li>
-            <li class="menu-item"><a href="./Manual.html">📖 <span class="link-text">Manual de Instalação</span></a></li>
-            
+            <li class="menu-item"><a href="http://localhost:3000/" target="_blank">🤖 <span
+                        class="link-text">BobIA</span></a></li>
+            <li class="menu-item"><a href="./Manual.html">📖 <span class="link-text">Manual de Instalação</span></a>
+            </li>
         </ul>
 
         <div class="sidebar-bottom">
-            <button class="btn-sair" id="btn_sair" onclick="limparSessao()">🚪 <span class="link-text">Logout</span></button>
+            <button class="btn-sair" id="btn_sair" onclick="limparSessao()">🚪 <span
+                    class="link-text">Logout</span></button>
         </div>
 
     </aside>
@@ -47,26 +51,7 @@
     <div class="conteudo_principal" id="id_conteudo_principal">
 
         <div class="dashboard">
-            <div class="fileira_cards">
-                <div class="card">
-                    <h3> Eficiência atual</h3>
-                    <p>80%</p>
-                    <h5>Ultima leitura: 12/04/2026</h5>
-                </div>
-
-                <div class="card">
-                    <h3> Impacto estimado </h3>
-                    <p> R$320,00 </p>
-                </div>
-
-                <div class="card">
-                    <h3> Status </h3>
-                    <p>Recomenda-se limpeza</p>
-                </div>
-                <div class="card">
-                    <h3> Ultima limpeza </h3>
-                    <p> 13/05/2026 </p>
-                </div>
+            <div class="fileira_cards" id="cards">
 
             </div>
 
@@ -96,5 +81,4 @@
             <script src="./JS/js_dashboard.js"></script>
         </div>
 </body>
-
 </html>
