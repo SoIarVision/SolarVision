@@ -38,7 +38,9 @@
         </ul>
     </nav>
 
-    
+
+
+
 
     <section class="hero-pag" id="Inicio">
         <div class="hero-conteudo container">
@@ -245,9 +247,24 @@
 
         </div>
 
+    </section>
 
+    <section class="bob">
+
+        <img src="../assets/icon/bobIA.png" alt="BobIA" class="btn-bob" id="btnBob">
+
+        
+        <div class="card-bob" id="cardBob">
+
+            <iframe src="http://localhost:3000/"></iframe>
+            <!--Essa bomba aqui puxa o HTML do chat e deixar ele em cardizinho quando clica na imagem-->
+
+        </div>
 
     </section>
+
+
+
 
 </body>
 <script>
@@ -271,6 +288,15 @@
             .getElementById("submenuPassos")
             .classList.toggle("ativo");
     }
+    const btnBob = document.getElementById("btnBob");
+    const cardBob = document.getElementById("cardBob");
+
+    btnBob.addEventListener("click", () => {
+        cardBob.classList.toggle("ativo");
+    });
+
+    //isso daqui serve pra quando clicar na imagemzinha aparecer o cardizinho do chat, é isso bbs
+
 </script>
 
 </html>
