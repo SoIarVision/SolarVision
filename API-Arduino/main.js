@@ -18,11 +18,11 @@ const serial = async (
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: 'localhost',
-            user: 'Lucas',
-            password: 'Luan0403@',
+            host: '10.18.32.65',
+            user: 'aluno',
+            password: 'Sptech#2024',
             database: 'solar_Vision',
-            port: 3306
+            port: 3307
         }
     ).promise();
 
@@ -77,7 +77,7 @@ const serial = async (
         let ax4 = 0;
         let ax5 = 0;
         let ax6 = 0;
-        let limite_variacao_sensores = 50;
+        let limite_variacao_sensores = 100;
 
         let indicacao_sensor = 0; // vai enviar o registro para o grupo certo do sensor
         
@@ -87,8 +87,8 @@ const serial = async (
             // LOOP PARA MOCKAR DADOS NO BANCO
             
             for(let i = 1; i <= 6; i++){
-                let rdn_ideal = Number(Math.random() * 25 + 1)
-                let rdn_controle = Number(Math.random() * 50 + 25)
+                let rdn_ideal = Number(Math.random() * 30 + 10)
+                let rdn_controle = Number(Math.random() * 30 +30)
                 if(i == 1){
 
                 sensorLuminosidade += Number(rdn_ideal.toFixed(0))

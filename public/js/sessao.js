@@ -15,20 +15,55 @@ function validarSessao() {
 function ajustarNavbarSessao() {
     /*var idUsuario = sessionStorage.ID_USUARIO;
     var tipoUsuario = sessionStorage.TIPO
-*/
+*/ 
+    let cargo = sessionStorage.CARGO_USUARIO;
 
-    let idUsuario = undefined
+    let idUsuario = sessionStorage.ID_USUARIO
+
     if (idUsuario == undefined) {
-        logo_navbar.style.display = "none";
-        
+        nav_home.style.display = "block";
+        nav_sobre.style.display = "block";
+        nav_simulador.style.display = "none";
+        nav_logar.style.display = "block";
+        nav_cadastro.style.display = "block";
     } else {
-        logo_navbar.style.display = "none";
+        nav_home.style.display = "block";
+        nav_sobre.style.display = "block";
+        nav_simulador.style.display = "block";
+        nav_logar.style.display = "none";
+        nav_cadastro.style.display = "none";
 
-/*        if(tipoUsuario == 'admin'){
-            link_dashboard.style.display = "block";
-        }*/
+        // Gerente, Suporte, Adminastrador, Funcionário
+
+        if(cargo == 'Adminastrador'){
+            side_dashboard.style.display = "block";
+            side_empresa.style.display = "block";
+            side_suporte.style.display = "block";
+            side_bobIA.style.display = "block";
+            side_manual.style.display = "block";
+        }else if (cargo == 'Suporte'){
+            side_dashboard.style.display = "block";
+            side_empresa.style.display = "none";
+            side_suporte.style.display = "block";
+            side_bobIA.style.display = "block";
+            side_manual.style.display = "block";
+        } else if (cargo == 'Funcionário'){
+            side_dashboard.style.display = "block";
+            side_empresa.style.display = "none";
+            side_suporte.style.display = "block";
+            side_bobIA.style.display = "none";
+            side_manual.style.display = "none";
+        }else if (cargo == 'Gerente'){
+            side_dashboard.style.display = "block";
+            side_empresa.style.display = "block";
+            side_suporte.style.display = "block";
+            side_bobIA.style.display = "none";
+            side_manual.style.display = "none";
+        }
         
     }
+
+
 }
 
 function limparSessao() {
