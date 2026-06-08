@@ -475,3 +475,48 @@ button:last-child:hover {
     align-items: center;
     color: #848686;
 }
+
+.bobia{
+    height: 300px;
+    width: 400px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: rgb(123, 123, 212);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    gap: 50px;
+    margin-top: 50px;
+    margin-left: 15px;
+    color: aliceblue;
+    text-align: center;
+    border: 10px;
+    border-color: rgb(1, 1, 85);
+}
+
+.bobia_button{
+    height: 250px;
+    width: 250px;
+    border-radius: 150px;
+    background-image: url("../../assets/icon/bobIA.png");
+    background-position: center;
+    background-size: cover;
+
+}   
+.bobia_section{
+    bottom: 0;
+    right: 0;
+    height: 500px;
+    width: 400px;
+}
+.centralizar_button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.position_bob{
+    position: relative;
+    bottom: 0;
+    right: 0;
+
+}

@@ -3,10 +3,7 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
-
     if (email != null && nome != null) {
-        b_usuario.innerHTML = nome;
     } else {
         window.location = "../login.html";
     }
@@ -15,7 +12,7 @@ function validarSessao() {
 function ajustarNavbarSessao() {
     /*var idUsuario = sessionStorage.ID_USUARIO;
     var tipoUsuario = sessionStorage.TIPO
-*/ 
+*/
     let cargo = sessionStorage.CARGO_USUARIO;
 
     let idUsuario = sessionStorage.ID_USUARIO
@@ -24,43 +21,45 @@ function ajustarNavbarSessao() {
         nav_home.style.display = "block";
         nav_sobre.style.display = "block";
         nav_simulador.style.display = "none";
+        nav_dash.style.display = "none";
         nav_logar.style.display = "block";
         nav_cadastro.style.display = "block";
     } else {
         nav_home.style.display = "block";
         nav_sobre.style.display = "block";
         nav_simulador.style.display = "block";
+        nav_dash.style.display = "block";
         nav_logar.style.display = "none";
         nav_cadastro.style.display = "none";
 
         // Gerente, Suporte, Adminastrador, Funcionário
 
-        if(cargo == 'Adminastrador'){
+        if (cargo == 'Adminastrador') {
             side_dashboard.style.display = "block";
             side_empresa.style.display = "block";
             side_suporte.style.display = "block";
             side_bobIA.style.display = "block";
             side_manual.style.display = "block";
-        }else if (cargo == 'Suporte'){
+        } else if (cargo == 'Suporte') {
             side_dashboard.style.display = "block";
             side_empresa.style.display = "none";
             side_suporte.style.display = "block";
             side_bobIA.style.display = "block";
             side_manual.style.display = "block";
-        } else if (cargo == 'Funcionário'){
+        } else if (cargo == 'Funcionário') {
             side_dashboard.style.display = "block";
             side_empresa.style.display = "none";
             side_suporte.style.display = "block";
             side_bobIA.style.display = "none";
             side_manual.style.display = "none";
-        }else if (cargo == 'Gerente'){
+        } else if (cargo == 'Gerente') {
             side_dashboard.style.display = "block";
             side_empresa.style.display = "block";
             side_suporte.style.display = "block";
             side_bobIA.style.display = "none";
             side_manual.style.display = "none";
         }
-        
+
     }
 
 

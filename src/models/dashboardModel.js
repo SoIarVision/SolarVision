@@ -21,6 +21,7 @@ function mostrarEficiencia(idEmpresa) {
     console.log("Executando a instrução SQL: \n" + InstrucaoSQL);
     return database.executar(InstrucaoSQL, [idEmpresa])
 }
+
 function ultimaLimpeza() {
     var InstrucaoSQL = `
     select * from vw_ultima_limpeza;`
@@ -29,8 +30,16 @@ function ultimaLimpeza() {
     return database.executar(InstrucaoSQL)
 }
 
+function graficoEficiencia() {
+    var InstrucaoSQL = `
+    select * from vw_grafico_dashboard;`
 
+    console.log("Executando a instrução SQL: \n" + InstrucaoSQL);
+    return database.executar(InstrucaoSQL)
+}
 
 module.exports = {
-    mostrarEficiencia, ultimaLimpeza
+    mostrarEficiencia,
+    ultimaLimpeza,
+    graficoEficiencia
 }
