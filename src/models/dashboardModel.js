@@ -23,7 +23,7 @@ function mostrarEficiencia(idEmpresa) {
 }
 function ultimaLimpeza() {
     var InstrucaoSQL = `
-    select * from historico_eficiencia order by valor_eficiencia >= 92 desc limit 1;`
+    select * from vw_ultima_limpeza;`
 
     console.log("Executando a instrução SQL: \n" + InstrucaoSQL);
     return database.executar(InstrucaoSQL)
