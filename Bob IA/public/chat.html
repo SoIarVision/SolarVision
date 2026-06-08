@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat SolarVision</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div>
+        
+    </div>
+    <div class="chat">
+        <div class="cabecalho">
+            <div class="icone">SV</div>
+
+            <div>
+                <h1>Suporte SolarVision</h1>
+                <p>Assistente virtual</p>
+            </div>
+        </div>
+
+        <div class="mensagens" id="mensagens">
+            <div class="mensagem ia">
+                Olá! Como posso ajudar você com o SolarVision?
+            </div>
+        </div>
+
+        <div class="area-envio">
+            <input type="text" id="campo_pergunta" placeholder="Digite sua mensagem...">
+
+            <button id="botao_enviar" onclick="enviarMensagem()">
+                Enviar
+            </button>
+        </div>
+    </div>
+
+    <script src="chat.js"></script>
+</body>
+
+</html>
