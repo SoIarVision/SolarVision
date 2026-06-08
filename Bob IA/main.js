@@ -44,11 +44,16 @@ app.listen(PORTA_SERVIDOR, () => {
 
 // rota para receber perguntas e gerar respostas
 app.post("/perguntar", async (req, res) => {
-    const pergunta = req.body.pergunta;
+    const pergunta = req.body.pergunta?.trim();
+
+    if (!pergunta) {
+        return res.status(400).json({ error: "A pergunta não pode estar vazia." });
+    }
+
 
     try {
         const resultado = await gerarResposta(pergunta);
-        res.json({ resultado });
+        return res.json({ resultado });
     } catch (error) {
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
