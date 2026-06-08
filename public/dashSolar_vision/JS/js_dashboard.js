@@ -75,7 +75,7 @@ const ctx_linha = document.getElementById("eficiencia_por_dia");
 
 /* DECLARAÇÃO DE VARIÁVEIS PARA MOCKAR DADOS */
 const dias = [];
-for (let i = 1; i <= 30; i++) {
+for (let i = 1; i <= 7; i++) {
     dias.push(i);
 }
 
