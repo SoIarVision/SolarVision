@@ -11,4 +11,8 @@ router.get("/dashboard/limpeza", function (req, res) {
     dashboardController.ultimaLimpeza(req, res);
 });
 
+router.get("/dashboard/grafico/eficiencia", function (req, res) {
+    dashboardController.graficoEficiencia(req, res);
+});
+
 module.exports = router

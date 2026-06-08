@@ -288,3 +288,19 @@ function limpeza() {
 }
 atualizar_eficiencia()
 limpeza()
+
+fetch("/dashboard/grafico/eficiencia")
+    .then((resultado) => resultado.json())
+    .then((dados) => {
+        dados.labels.shift(); // apagar o primeiro
+        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+        dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
+
+        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+        myChart.update();
+
+    });

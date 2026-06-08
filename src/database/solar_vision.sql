@@ -259,4 +259,16 @@ LIMIT 6;
 */
 select * from registro order by idRegistro desc;
 select * from historico_eficiencia order by idEficiencia desc LIMIT 1;
-select * from historico_eficiencia where valor_eficiencia >= 90;
+select 
+	idEficiencia,
+	valor_eficiencia valor,
+    dt_eficiencia
+from historico_eficiencia order by idEficiencia desc LIMIT 7;
+
+SELECT 
+    DATE(dt_eficiencia) AS dia,
+    ROUND(AVG(valor_eficiencia), 1) AS eficiencia_media
+FROM historico_eficiencia
+WHERE dt_eficiencia >= NOW() - INTERVAL 7 DAY
+GROUP BY DATE(dt_eficiencia)
+ORDER BY dia;
