@@ -3,7 +3,7 @@ var dashboardModel = require("../models/dashboardModel")
 function mostrarEficiencia(req, res) {
   var idEmpresa = req.params.idEmpresa
 
-    dashboardModel.mostrarEficiencia()
+    dashboardModel.mostrarEficiencia(idEmpresa)
         .then((resultado) => {
             if (resultado.length === 0) {
                 return res.status(404).json({ mensagem: "Eficiência não encontrada." });

@@ -139,3 +139,129 @@ button:hover {
 h3 {
     display: none;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #edf3f1;
+    font-family: Arial, sans-serif;
+}
+
+.chat {
+    width: 700px;
+    height: 650px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.cabecalho {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    background-color: #123b35;
+}
+
+.cabecalho h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.cabecalho p {
+    margin: 5px 0 0;
+    color: #cbd8d5;
+    font-size: 14px;
+}
+
+.icone {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #123b35;
+    background-color: #f2b544;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+.mensagens {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    background-color: #f7f9f8;
+}
+
+.mensagem {
+    max-width: 75%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    line-height: 1.4;
+}
+
+.mensagem.ia {
+    align-self: flex-start;
+    color: #222222;
+    background-color: #e2e8e6;
+}
+
+.mensagem.usuario {
+    align-self: flex-end;
+    color: white;
+    background-color: #1d5b51;
+}
+
+.area-envio {
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    border-top: 1px solid #dddddd;
+}
+
+#campo_pergunta {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+#campo_pergunta:focus {
+    border-color: #1d5b51;
+}
+
+#botao_enviar {
+    padding: 12px 20px;
+    color: white;
+    background-color: #1d5b51;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#botao_enviar:hover {
+    background-color: #123b35;
+}
+
+#botao_enviar:disabled {
+    background-color: #999999;
+    cursor: not-allowed;
+}
+

@@ -275,6 +275,6 @@ fetch(`/dashboard/eficiencia/${idEmpresa}`)
     });
 
     setTimeout(() => {
-        atualizar_eficiencia()}, 3000);
+        atualizar_eficiencia()}, 2000);
 }
 atualizar_eficiencia()
