@@ -52,6 +52,19 @@
 
         <div class="dashboard">
             <div class="fileira_cards" id="cards">
+                <div class="card">
+                    <h3>Eficiência atual</h3>
+                    <p id="eficiencia">${eficiencia}%</p>
+                    <h5>Última leitura: <br><span id="dataEficiencia"></span></h5>
+                </div>
+                <div class="card">
+                    <h3> Status </h3>
+                    <p id="status">${status}</p>
+                </div>
+                <div class="card">
+                    <h3> Ultima limpeza </h3>
+                    <p id="dataLimpeza"> ${dataFormatada}</p>
+                </div>
 
             </div>
 
@@ -81,4 +94,5 @@
             <script src="./JS/js_dashboard.js"></script>
         </div>
 </body>
+
 </html>

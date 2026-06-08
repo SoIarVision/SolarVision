@@ -7,4 +7,8 @@ router.get("/dashboard/eficiencia/:idEmpresa", function (req, res) {
     dashboardController.mostrarEficiencia(req, res);
 });
 
+router.get("/dashboard/limpeza", function (req, res) {
+    dashboardController.ultimaLimpeza(req, res);
+});
+
 module.exports = router
