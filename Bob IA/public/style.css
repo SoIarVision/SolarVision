@@ -1,51 +1,141 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #63B1BC;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #081535, #0a1840);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
 }
 
 #container {
-    width: 80%;
-    margin: 50px auto;
-    text-align: center;
+    width: 90%;
+    max-width: 1000px;
+
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+
+    padding: 40px;
 }
 
 h1 {
-    color: #1F2A44;
+    text-align: center;
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 800;
 }
 
-textarea[type="text"] {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    width: 400px;
+.subtitulo {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 8px;
+    margin-bottom: 30px;
+    font-size: 1rem;
 }
 
-select,
+.input-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+textarea {
+    flex: 1;
+
+    height: 80px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+
+    padding: 20px;
+
+    color: white;
+    font-size: 1rem;
+
+    resize: none;
+    outline: none;
+
+    transition: .3s;
+}
+
+textarea:focus {
+    border-color: #f97316;
+}
+
+textarea::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
 button {
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+    width: 65px;
+    height: 65px;
 
-button {
-    background-color: #ED145B;
-    color: #FFFFFF;
     border: none;
+    border-radius: 18px;
+
+    background: #f97316;
+    color: white;
+
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    transition: .3s;
 }
 
 button:hover {
-    background-color: #EFB661;
+    background: #d86411;
+    transform: translateY(-2px);
 }
 
 #resposta {
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #D0D3D4;
-    border: 1px solid #63666A;
-    text-align: left;
+    margin-top: 30px;
+
+    min-height: 250px;
+    max-height: 400px;
+
+    overflow-y: auto;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+
+    padding: 20px;
+
+    color: white;
+}
+
+.mensagem {
+    max-width: 75%;
+    padding: 12px 16px;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.usuario {
+    background: #f97316;
+    margin-left: auto;
+    color: white;
+}
+
+.ia {
+    background: #162a63;
+    color: white;
+}
+
+h3 {
     display: none;
 }
