@@ -87,3 +87,17 @@ function finalizarAguardar(texto) {
     }
 }
 
+document.getElementById("id_fechar").addEventListener("click", function () {
+
+    document.getElementById("id_sidebar").classList.toggle("fechar");
+    document.getElementById("id_conteudo_principal").classList.toggle("fechar");
+    document.getElementById("id_navbar").classList.toggle("fechar");
+
+
+
+    if (document.getElementById("id_navbar").classList.contains("fechar")) {
+        document.getElementById("logo_navbar").style.display = "block";
+    } else {
+        document.getElementById("logo_navbar").style.display = "none";
+    }
+});
