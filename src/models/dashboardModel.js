@@ -14,7 +14,7 @@ function mostrarEficiencia(idEmpresa) {
     JOIN grupo_sensor gs ON gs.idSensor = r.fkSensor
     JOIN placa p ON p.idPlaca = gs.fkPlaca
     JOIN empresa e ON e.idEmpresa = p.fkEmpresa
-    WHERE e.idEmpresa = 1
+    WHERE e.idEmpresa = ?
     ORDER BY r.idRegistro DESC
     LIMIT 6;`
 

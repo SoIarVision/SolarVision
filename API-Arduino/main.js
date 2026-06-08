@@ -19,10 +19,10 @@ const serial = async (
     let poolBancoDados = mysql.createPool(
         {
             host: 'localhost',
-            user: 'aluno',
-            password: 'Sptech#2024',
+            user: 'Lucas',
+            password: 'Luan0403@',
             database: 'solar_Vision',
-            port: 3307
+            port: 3306
         }
     ).promise();
 
@@ -87,10 +87,11 @@ const serial = async (
             // LOOP PARA MOCKAR DADOS NO BANCO
             
             for(let i = 1; i <= 6; i++){
-
+                let rdn_ideal = Number(Math.random() * 25 + 1)
+                let rdn_controle = Number(Math.random() * 50 + 25)
                 if(i == 1){
 
-                sensorLuminosidade += 10
+                sensorLuminosidade += Number(rdn_ideal.toFixed(0))
                 soma_ideal += sensorLuminosidade
 
                  ax1 = sensorLuminosidade
@@ -99,7 +100,7 @@ const serial = async (
 
                 }else if(i == 2){
 
-                    sensorLuminosidade += 20
+                    sensorLuminosidade += Number(rdn_ideal.toFixed(0))
                     soma_ideal += sensorLuminosidade
 
                      ax2 = sensorLuminosidade
@@ -108,7 +109,7 @@ const serial = async (
 
                 } else if(i == 3){
 
-                    sensorLuminosidade += 2
+                    sensorLuminosidade += Number(rdn_ideal.toFixed(0))
                     soma_ideal += sensorLuminosidade
 
                      ax3 = sensorLuminosidade
@@ -117,7 +118,7 @@ const serial = async (
 
                 }else if(i == 4){
 
-                    sensorLuminosidade -= 100
+                    sensorLuminosidade -= Number(rdn_controle.toFixed(0))
                     soma_controle += sensorLuminosidade
 
                      ax4 = sensorLuminosidade
@@ -126,7 +127,7 @@ const serial = async (
 
                 } else if(i == 5){
 
-                    sensorLuminosidade -= 80
+                    sensorLuminosidade -= Number(rdn_controle.toFixed(0))
                     soma_controle += sensorLuminosidade
 
                      ax5 = sensorLuminosidade
@@ -135,7 +136,7 @@ const serial = async (
 
                 }else if(i == 6){
 
-                    sensorLuminosidade -= 20
+                    sensorLuminosidade -= Number(rdn_controle.toFixed(0))
                     soma_controle += sensorLuminosidade
 
                      ax6 = sensorLuminosidade
@@ -147,8 +148,8 @@ const serial = async (
             // este insert irá inserir os dados na tabela "registro" e indicará se a leitura é de um sensor controle ou ideal através da fk
 
             await poolBancoDados.execute(
-            'INSERT INTO registro (valorLuminosidade, fk_grupo, fkplaca) VALUES (?, ?, ?)',
-            [sensorLuminosidade, indicacao_sensor, 1]
+            'INSERT INTO registro (valor, fkSensor) VALUES (?, ?)',
+            [sensorLuminosidade, indicacao_sensor]
             );
             console.log("valores inseridos no banco: ", sensorLuminosidade);
 
@@ -166,11 +167,11 @@ const serial = async (
                         } else { erro_senquencial_ideal = 0; 
 
                             await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE idSensor = (?)',
                         ['Em funcionamento', 2] )
                             
                         await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET valor_leitura = (?) WHERE idSensor = (?)',
                         [soma_ideal, 2]  )
 
                         }
@@ -183,11 +184,11 @@ const serial = async (
                          } else { erro_senquencial_controle = 0; 
 
                             await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE idsensor = (?)',
                         ['Em funcionamento', 1]  )
 
                             await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET luminosidade_recebida = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET valor_leitura = (?) WHERE idsensor = (?)',
                         [soma_controle, 1]  )
 
                          }
@@ -196,30 +197,30 @@ const serial = async (
 
                  if(erro_senquencial_controle >= 5){
                     await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE idsensor = (?)',
                         ['apresentando falha', 1] 
                     )
-                    await poolBancoDados.execute(
-                    'INSERT INTO historico_falha (fk_placa, fk_empresa, fk_sensor) VALUES ((?), (?), (?)) ',
-                        [1, 1, 1]
-                    )
+                    // await poolBancoDados.execute(
+                    // 'INSERT INTO historico_falha (fk_placa, fk_empresa, fk_sensor) VALUES ((?), (?), (?)) ',
+                    //     [1, 1, 1]
+                    // )
                  }
                  if(erro_senquencial_ideal >= 5){
                     await poolBancoDados.execute(
-                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE id_grupo = (?)',
+                        'UPDATE grupo_sensor SET status_sensor = (?) WHERE idsensor = (?)',
                         ['apresentando falha', 2] 
                     )
-                    await poolBancoDados.execute(
-                    'INSERT INTO historico_falha (fk_placa, fk_empresa, fk_sensor) VALUES ((?), (?), (?)) ',
-                    [1, 1, 2]
-                    )
+                    // await poolBancoDados.execute(
+                    // 'INSERT INTO historico_falha (fk_placa, fk_empresa, fk_sensor) VALUES ((?), (?), (?)) ',
+                    // [1, 1, 2]
+                    // )
                  }
         // VARIAVEL PARA CALCULAR EFICIENCIA em %
         let eficiencia = (soma_controle / soma_ideal)*100;
         
         await poolBancoDados.execute(
-            'INSERT INTO historico_eficiencia (valor, fk_placa, fk_empresa) VALUES ((?), (?), (?)) ',
-            [eficiencia, 1, 1]
+            'INSERT INTO historico_eficiencia (valor_eficiencia, fkPlaca) VALUES ((?), (?)) ',
+            [eficiencia, 1]
         )
 
         
