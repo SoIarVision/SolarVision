@@ -118,7 +118,6 @@ INSERT INTO historico_eficiencia (valor_eficiencia, fkPlaca) VALUES
 (92.4, 1),
 (87.5, 2);
 
-CREATE VIEW vw_detalhamento_sensor AS
 SELECT
     p.idPlaca AS 'Placa Solar',
     p.descricao AS 'Descrição',
@@ -139,7 +138,6 @@ ON ef.fkPlaca = p.idPlaca
 JOIN grupo_sensor g
 ON g.fkPlaca = p.idPlaca;
 
-CREATE VIEW vw_registro_ref_empresa AS
 SELECT
     e.nome AS 'Empresa',
     u.nome AS 'Funcionário Responsável',
@@ -157,7 +155,6 @@ ON g.fkPlaca = p.idPlaca
 JOIN registro r
 ON r.fkSensor = g.idSensor;
 
-CREATE VIEW vw_funcionario AS
 SELECT
     e.nome AS 'Empresa',
     u.nome AS 'Funcionário',
@@ -169,7 +166,6 @@ ON u.fkEmpresa = e.idEmpresa
 JOIN cargo c
 ON c.idCargo = u.fkCargo;
 
-CREATE VIEW vw_registro AS
 SELECT
     r.valor,
     r.data_registro,
@@ -197,7 +193,6 @@ JOIN empresa e ON e.idEmpresa = u.fkEmpresa
 where idEmpresa = ?;
 */
 
-
 CREATE VIEW vw_listar_empresas AS
 SELECT 
 	e.idEmpresa id,
@@ -217,11 +212,11 @@ LEFT JOIN usuario u ON u.fkEmpresa = e.idEmpresa
 group by e.idEmpresa, e.nome, e.endereco
 order by e.idEmpresa;
 
+create view vw_ultima_limpeza as 
+SELECT * FROM historico_eficiencia WHERE valor_eficiencia >= 98.5 ORDER BY idEficiencia DESC LIMIT 1;
+
 select * from vw_listar_empresas;
-select * from vw_detalhamento_sensor;
-select * from vw_registro_ref_empresa;
-select * from vw_funcionario;
-select * from vw_registro;
+select * from vw_ultima_limpeza;
 
 select * from grupo_sensor;
 select * from registro;
@@ -262,14 +257,6 @@ WHERE e.idEmpresa = ?
 ORDER BY r.idRegistro DESC
 LIMIT 6;
 */
-
-INSERT INTO registro (valor, data_registro, fkSensor) VALUES
-(500, '2026-06-07 08:35:00', 2),
-(520, '2026-06-07 08:35:00', 2),
-(480, '2026-06-07 08:35:00', 2),
-
-(480, '2026-06-07 08:35:00', 1),
-(470, '2026-06-07 08:35:00', 1),
-(490, '2026-06-07 08:35:00', 1);
-
-delete from registro where idRegistro > 45;
+select * from registro order by idRegistro desc;
+select * from historico_eficiencia order by idEficiencia desc LIMIT 1;
+select * from historico_eficiencia where valor_eficiencia >= 90;
