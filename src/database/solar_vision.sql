@@ -265,10 +265,52 @@ select
     dt_eficiencia
 from historico_eficiencia order by idEficiencia desc LIMIT 7;
 
-SELECT 
-    DATE(dt_eficiencia) AS dia,
-    ROUND(AVG(valor_eficiencia), 1) AS eficiencia_media
-FROM historico_eficiencia
-WHERE dt_eficiencia >= NOW() - INTERVAL 7 DAY
-GROUP BY DATE(dt_eficiencia)
-ORDER BY dia;
+create view vw_grafico_dashboard as
+SELECT *
+FROM (
+    SELECT
+        DATE(dt_eficiencia) AS dia,
+        ROUND(AVG(valor_eficiencia), 1) AS eficiencia_media
+    FROM historico_eficiencia
+    WHERE dt_eficiencia >= NOW() - INTERVAL 7 DAY
+    GROUP BY DATE(dt_eficiencia)
+    ORDER BY dia DESC
+    LIMIT 7
+) ultimos_dias
+ORDER BY dia ASC;
+
+select * from vw_grafico_dashboard;
+
+INSERT INTO historico_eficiencia (valor_eficiencia, dt_eficiencia, fkPlaca) VALUES
+-- Dia 02
+(91.2, '2026-06-02 08:00:00', 1),
+(92.5, '2026-06-02 12:00:00', 1),
+(93.1, '2026-06-02 18:00:00', 1),
+
+-- Dia 03
+(92.0, '2026-06-03 08:00:00', 1),
+(93.4, '2026-06-03 12:00:00', 1),
+(89.2, '2026-06-03 18:00:00', 1),
+
+-- Dia 04
+(90.1, '2026-06-04 08:00:00', 1),
+(90.0, '2026-06-04 12:00:00', 1),
+(91.3, '2026-06-04 18:00:00', 1),
+
+-- Dia 06
+(80.2, '2026-06-06 08:00:00', 1),
+(82.1, '2026-06-06 12:00:00', 1),
+(89.0, '2026-06-06 18:00:00', 1),
+
+-- Dia 07
+(81.0, '2026-06-07 08:00:00', 1),
+(76.2, '2026-06-07 12:00:00', 1),
+(79.1, '2026-06-07 18:00:00', 1),
+
+-- Dia 09
+(96.1, '2026-06-09 08:00:00', 1),
+(97.3, '2026-06-09 12:00:00', 1),
+(98.4, '2026-06-09 18:00:00', 1);
+
+select * from historico_eficiencia order by idEficiencia desc;
+delete from historico_eficiencia where idEficiencia > 1115;
